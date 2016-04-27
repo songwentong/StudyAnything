@@ -5,23 +5,29 @@ import javax.swing.filechooser.FileSystemView;
 
 public class XMLChecker {
 	public void check(){
+		Thread thread =  new Thread(new Runnable() {
+			public void run() {
+				System.out.println("线程启动");
+				
+				ArrayList<String> findAllXMLFilePathes = findAllXMLFilePathes();
+				
+				System.out.println(findAllXMLFilePathes + "");
+			}
+		});
+		thread.start();
 		
-		FileSystemView fsv=FileSystemView.getFileSystemView();
-		  //将桌面的那个文件目录赋值给file
-		File file=fsv.getHomeDirectory();
-		System.out.println(file.getAbsolutePath());
-		
-		
-		ArrayList<String> findAllXMLFilePathes = findAllXMLFilePathes();
-		
-		System.out.println(findAllXMLFilePathes + "");
+
 	}
 	
 	
 	//找到所有的XML目录
 	public ArrayList<String> findAllXMLFilePathes(){
-		//找到桌面的文件夹
-		File file = new File("/Users/songwentong/Desktop/xml");
+		FileSystemView fsv=FileSystemView.getFileSystemView();
+		  //将桌面的那个文件目录赋值给file
+		File desktop=fsv.getHomeDirectory();
+		
+		//找到桌面的文件夹  /Users/songwentong/Desktop/xml
+		File file = new File(desktop.getAbsolutePath()+"/Desktop/xml");
 		//获取文件列表
 		String [] list = file.list();
 		
@@ -30,12 +36,12 @@ public class XMLChecker {
 		
 		//如果文件不存在
 		if(list == null){
-			System.out.println("找不到XML路径");
+			//XML路径找不到
 			return allXMLFilePaths;
 		}else{
 			//从1开始是为了去掉.DS_Store
 			for (int i=0;i<list.length;i++){
-				System.out.println(list[i] + "");
+
 				
 				if(list[i].equals(".DS_Store")){
 					//如果是DS_Store文件就什么都不做
