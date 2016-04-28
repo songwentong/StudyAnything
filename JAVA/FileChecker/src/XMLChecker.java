@@ -19,27 +19,10 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
+import XMLParser.*;
 
 public class XMLChecker {
 	public void check(){
-		
-		Map<String,String> map = new HashMap<String,String>();
-        map.put("name","chris");
-        map.put("island","faranga");
-
-        XStream magicApi = new XStream(new DomDriver());
-        magicApi.registerConverter(new MapEntryConverter());
-        magicApi.alias("root", Map.class);
-
-        String xml = magicApi.toXML(map);
-        System.out.println("Result of tweaked XStream toXml()");
-        System.out.println(xml);
-
-        Map<String, String> extractedMap = (Map<String, String>) magicApi.fromXML(xml);
-        assert extractedMap.get("name").equals("chris");
-        assert extractedMap.get("island").equals("faranga");
-		
-		/*
 		Thread thread =  new Thread(new Runnable() {
 			public void run() {
 				System.out.print("线程启动---");
@@ -52,7 +35,7 @@ public class XMLChecker {
 			}
 		});
 		thread.start();
-		*/
+		
 
 	}
 	
@@ -113,7 +96,7 @@ public class XMLChecker {
 		checkFileWithPath(paths.get(fromIndex));
 		if(fromIndex != paths.size()-1){
 			//如果不是最后一个,就读取下一个
-			checkFileWithPath(paths.get(fromIndex-1));
+			checkFilePathes(paths,fromIndex+1);
 		}
 	}
 	//http://xuelianbobo.iteye.com/blog/2152238   xml解析
@@ -122,13 +105,22 @@ public class XMLChecker {
 //		XStream magicApi = new XStream();
 //		magicApi.registerConverter(new MapEntryConverter());
 //		Map map = (Map) magicApi.fromXML(path);
-		Map map = XMLParser.xmlObjectFromString();
+		String xmlString = XMLChecker.stringFromFilePath(path);
+		Map map = XMLParser.XMLObjectFromString(xmlString);
 		
 		checkMap(map);
 	}
 	
-	public boolean checkMap(Map map){
-		
+	public static String stringFromFilePath(String path){
+		return null;
+	}
+	
+	//递归遍历XML结构,并检查语法是否正确
+	public boolean checkMap(Object xml){
+		//if map ,遍历
+		//if String ,判断语法
+		//if ArrayList,遍历
+		//其他,通过
 		return false;
 	}
 	
