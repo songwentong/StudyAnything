@@ -1,4 +1,4 @@
-/FileCheckOperation.class
-/Main.class
-/XMLChecker.class
-/XMLChecker$1.class
+/XMLParser.class
+/MapEntryConverter.class
+/XMLParser$MapEntryConverter.class
+/XMLParser/

@@ -1,24 +1,68 @@
+import java.awt.List;
 import java.io.File;
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.filechooser.FileSystemView;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.converters.Converter;
+import com.thoughtworks.xstream.converters.MarshallingContext;
+import com.thoughtworks.xstream.converters.UnmarshallingContext;
+import com.thoughtworks.xstream.io.HierarchicalStreamReader;
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+
+import java.util.AbstractMap;
+import java.util.HashMap;
+import java.util.Map;
 
 public class XMLChecker {
 	public void check(){
+		
+		Map<String,String> map = new HashMap<String,String>();
+        map.put("name","chris");
+        map.put("island","faranga");
+
+        XStream magicApi = new XStream(new DomDriver());
+        magicApi.registerConverter(new MapEntryConverter());
+        magicApi.alias("root", Map.class);
+
+        String xml = magicApi.toXML(map);
+        System.out.println("Result of tweaked XStream toXml()");
+        System.out.println(xml);
+
+        Map<String, String> extractedMap = (Map<String, String>) magicApi.fromXML(xml);
+        assert extractedMap.get("name").equals("chris");
+        assert extractedMap.get("island").equals("faranga");
+		
+		/*
 		Thread thread =  new Thread(new Runnable() {
 			public void run() {
-				System.out.println("线程启动");
+				System.out.print("线程启动---");
 				
 				ArrayList<String> findAllXMLFilePathes = findAllXMLFilePathes();
 				
-				System.out.println(findAllXMLFilePathes + "");
+				System.out.print("xml 数量"+findAllXMLFilePathes.size());
+				
+				checkFilePathes(findAllXMLFilePathes, 0);
 			}
 		});
 		thread.start();
-		
+		*/
 
 	}
 	
+	
+	
+	/*
+	public ArrayList<String> findAllLanuageDir(){
+		
+	}
+	*/
 	
 	//找到所有的XML目录
 	public ArrayList<String> findAllXMLFilePathes(){
@@ -75,9 +119,31 @@ public class XMLChecker {
 	//http://xuelianbobo.iteye.com/blog/2152238   xml解析
 	//http://www.oschina.net/code/snippet_155593_49684  xml解析
 	public void checkFileWithPath(String path){
+//		XStream magicApi = new XStream();
+//		magicApi.registerConverter(new MapEntryConverter());
+//		Map map = (Map) magicApi.fromXML(path);
+		Map map = XMLParser.xmlObjectFromString();
 		
+		checkMap(map);
 	}
+	
+	public boolean checkMap(Map map){
+		
+		return false;
+	}
+	
 	
 
 }
+
+
+
+
+
+
+
+
+
+
+
 
