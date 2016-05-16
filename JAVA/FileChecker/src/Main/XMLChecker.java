@@ -45,6 +45,16 @@ public class XMLChecker {
 			public void run() {
 				Date date1 = new Date();
 				
+				String os = System.getProperty("os.name");
+				//是mac电脑
+				boolean isMac = false;
+				if (os.indexOf("Mac") != -1) {
+					isMac = true;
+				}else{
+					
+				}
+				
+				
 				System.out.print("check thread start\n" + date1.toString()+"\n");
 //				System.out.println("find the ");
 				
@@ -52,6 +62,9 @@ public class XMLChecker {
 				 // 将桌面的那个文件目录赋值给file
 //				File desktop=fsv.getHomeDirectory();
 				String path = fsv.getHomeDirectory().getAbsolutePath() + "/Desktop"; 
+				if (!isMac) {
+					path = fsv.getHomeDirectory().getAbsolutePath()+"//xml";
+				}
 				
 				ArrayList<String> findAllXMLFilePathes = findAllXMLFilePathesAtPath(path);
 				
