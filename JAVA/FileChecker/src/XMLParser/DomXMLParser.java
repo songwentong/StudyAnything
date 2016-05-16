@@ -16,8 +16,11 @@ import org.dom4j.DocumentHelper;
 import Main.*;
 public class DomXMLParser { 
 	
+	private static String currentPath;
+	
 	public static Map<String, Object> XMLObjectFromPath(String path){
 //		System.out.println("\n开始扫描文件:"+path);
+		currentPath = path;
 		Document doc = DomXMLParser.docFormPath(path);
 		Map<String, Object> xmlObj = DomXMLParser.Dom2Map(doc);
 		return xmlObj;
@@ -60,7 +63,7 @@ public class DomXMLParser {
 //            	System.out.println("\nDomXMLParser 57:"+string+"");
             	boolean result = checkString(string);
             	if(result == false){
-            	System.out.println("string may have grammatical errors \nkey: "+e.attributeValue("name")+"\nvalue: "+e.getText());	
+            	System.out.println("current Path:"+currentPath+"\n"+"string may have grammatical errors \nkey: "+e.attributeValue("name")+"\nvalue: "+e.getText());	
             	}
             	
                 map.put(e.getName(), e.getText());
