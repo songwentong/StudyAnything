@@ -58,8 +58,11 @@ public class DomXMLParser {
             	//得到的每一个字符串
             	String string = e.getText();
 //            	System.out.println("\nDomXMLParser 57:"+string+"");
+            	boolean result = checkString(string);
+            	if(result == false){
+            	System.out.println("string may have grammatical errors \nkey: "+e.attributeValue("name")+"\nvalue: "+e.getText());	
+            	}
             	
-            	checkString(string);
                 map.put(e.getName(), e.getText());
             }
         } 
@@ -104,8 +107,8 @@ public class DomXMLParser {
 				//这里第二次判断一下就可以确定结果了
 				if( temp.indexOf("%") >= 0){
 					
-					System.out.println("string may have grammatical errors: "+temp);
-					
+//					System.out.println("string may have grammatical errors: "+temp);
+					result = false;
 					
 				}else{
 					//不包含

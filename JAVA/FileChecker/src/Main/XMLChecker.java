@@ -38,6 +38,8 @@ public class XMLChecker {
 		super();
 		checkTime = 0;
 	}
+	
+	//检查桌面下名字为xml的文件夹下所有的xml文件,遍历筛选字符串
 	public void check(){
 		Thread thread =  new Thread(new Runnable() {
 			public void run() {
@@ -46,7 +48,12 @@ public class XMLChecker {
 				System.out.print("check thread start\n" + date1.toString()+"\n");
 //				System.out.println("find the ");
 				
-				ArrayList<String> findAllXMLFilePathes = findAllXMLFilePathes();
+				FileSystemView fsv=FileSystemView.getFileSystemView();
+				 // 将桌面的那个文件目录赋值给file
+//				File desktop=fsv.getHomeDirectory();
+				String path = fsv.getHomeDirectory().getAbsolutePath() + "/Desktop"; 
+				
+				ArrayList<String> findAllXMLFilePathes = findAllXMLFilePathesAtPath(path);
 				
 				System.out.print("number of xml files: "+findAllXMLFilePathes.size()+"\n");
 //				System.out.println("start check");
@@ -68,6 +75,50 @@ public class XMLChecker {
 		
 	}
 	*/
+	
+	public ArrayList<String> findAllXMLFilePathesAtPath(String path){
+		
+		//找到桌面的文件夹  /Users/songwentong/Desktop/xml
+		File file = new File(path);
+		//获取文件列表
+		String [] list = file.list();
+		
+		//所有的XML文件路径
+		ArrayList<String> allXMLFilePaths = new ArrayList<>();
+		
+		//如果文件不存在
+		if(list == null){
+			//XML路径找不到
+			return allXMLFilePaths;
+		}else{
+			//从1开始是为了去掉.DS_Store
+			for (int i=0;i<list.length;i++){
+
+				
+				if(list[i].equals(".DS_Store")){
+					//如果是DS_Store文件就什么都不做
+				}else{
+					//获取某个语言的路径
+					String languageDir = file.getAbsolutePath() +"/" + list[i];
+					//语言文件的文件夹
+					File languageFile = new File(languageDir);
+					if (languageFile.isDirectory()) {
+						allXMLFilePaths.addAll(findAllXMLFilePathesAtPath(languageDir));
+						
+					}else{
+						if(languageDir.indexOf(".xml") != -1){
+							allXMLFilePaths.add(languageDir);
+						}
+						
+					}
+					
+				}
+			}
+		}
+		
+		return allXMLFilePaths;
+	}
+	
 	
 	//找到所有的XML目录
 	public ArrayList<String> findAllXMLFilePathes(){
@@ -102,8 +153,13 @@ public class XMLChecker {
 					//当前目录下所有的文件
 					String []fileList = languageFile.list();
 					for(int j=0;j<fileList.length;j++){
-						String filePath = languageDir+"/"+fileList[j];
-						allXMLFilePaths.add(filePath);
+						
+						//是包含.xml的文件
+						if(fileList[j].indexOf(".xml") != -1){
+							String filePath = languageDir+"/"+fileList[j];
+							allXMLFilePaths.add(filePath);
+						}
+						
 						}
 				}
 			}
@@ -125,10 +181,18 @@ public class XMLChecker {
 	//检查单个文件
 	public void checkFileWithPath(String path){
 		//读取出字符串
+		
+		
+		
 //		String xmlString = XMLChecker.stringFromFilePath(path);
 		Map<String, Object> map = null;
-		//解析得到一个map,在解析的过程中调用一下检查吧
-		map = DomXMLParser.XMLObjectFromPath(path);
+		try{
+			//解析得到一个map,在解析的过程中调用一下检查吧
+			map = DomXMLParser.XMLObjectFromPath(path);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
 //		checkMap(map);
 	}
 	public boolean checkString (String string){
