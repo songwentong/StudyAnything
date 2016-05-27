@@ -33,6 +33,7 @@ import XMLParser.*;
 
 public class XMLChecker {
 	public static long checkTime;
+	public static int errorCount;
 	public XMLChecker() {
 		// TODO Auto-generated constructor stub
 		super();
@@ -68,12 +69,12 @@ public class XMLChecker {
 				
 				ArrayList<String> findAllXMLFilePathes = findAllXMLFilePathesAtPath(path);
 				
-				System.out.print("number of xml files: "+findAllXMLFilePathes.size()+"\n");
+				System.out.print("number of xml files : "+findAllXMLFilePathes.size()+"\n" );
 //				System.out.println("start check");
 				
 				checkFilePathes(findAllXMLFilePathes, 0);
 				date1 = new Date();
-				System.out.println("done, number of lines:"+checkTime + "\n" + date1.toString());
+				System.out.println("done, number of lines:"+checkTime +" \nerror count : "+errorCount + "\n" + date1.toString());
 			}
 		});
 		thread.start();

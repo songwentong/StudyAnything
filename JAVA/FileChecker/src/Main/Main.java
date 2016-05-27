@@ -1,5 +1,6 @@
 package Main;
 import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -9,6 +10,8 @@ import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+
+import XMLParser.DomXMLParser;
 
 public class Main{
 
@@ -26,7 +29,8 @@ public class Main{
 //		String s1 = "aaaa";
 //		String s2 = "a";
 		
-		
+//	ArrayList<Integer> result = DomXMLParser.findOccrrenceFormString("dasdsadsa%asdsadas", "%");
+//	System.out.println(result);
 	}
 	
 	

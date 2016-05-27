@@ -63,6 +63,7 @@ public class DomXMLParser {
 //            	System.out.println("\nDomXMLParser 57:"+string+"");
             	boolean result = checkString(string);
             	if(result == false){
+            	XMLChecker.errorCount ++;
             	System.out.println("current Path:"+currentPath+"\n"+"string may have grammatical errors \nkey: "+e.attributeValue("name")+"\nvalue: "+e.getText());	
             	}
             	
@@ -72,58 +73,94 @@ public class DomXMLParser {
         return map; 
     } 
   
+  /*
+   检查字符串是否合法
+   */
   public static boolean checkString (String string){
 	  XMLChecker.checkTime ++;
 	  
 		boolean result = true;
 		if(string != null){
+			
+			String temp = string.replace("%%", "");
 			//为了加快效率,这里先进行一次筛选
-			if( string.indexOf("%") >= 0){
-				String temp = string;
-				//去掉双百分号
-				temp = temp.replaceAll("%%", "");
+			ArrayList<Integer> results = findOccrrenceFormString(temp, "%");
+			int count = results.size();
+			
+			switch (count){
+			case 0:
+			{
+				//do nothing
+				return true;
+			}
+			case 1:
+			{
+				//如果只有一个百分号,找到这个字符
 				temp = temp.replace("%d", "");
 				temp = temp.replace("%s", "");
-				temp = temp.replace("%f", "");
+				temp = temp.replace("%f", ""); 
+			}
+			break;
+			default:
+			{
+				//如果有多个百分号,假设不超过3个,按照规则找出百分号
 				temp = temp.replace("%1$s", "");
 				temp = temp.replace("%2$s", "");
 				temp = temp.replace("%3$s", "");
 				temp = temp.replace("%1$d", "");
 				temp = temp.replace("%2$d", "");
 				temp = temp.replace("%3$d", "");
-				
-				for (int i=0;i<=100;i++){
-					String percent = i+"%";
-					temp = temp.replace(percent, "");
-					percent = i + " %";
-					temp = temp.replace(percent, "");
-					percent = i+" %";
-					temp = temp.replace(percent, "");
-					percent = "%"+i;
-					temp = temp.replace(percent, "");
-					percent = " %"+i;
-					temp = temp.replace(percent, "");
-					percent = " % "+i;
-					temp = temp.replace(percent, "");
-				}
-				
-				//这里第二次判断一下就可以确定结果了
-				if( temp.indexOf("%") >= 0){
-					
-//					System.out.println("string may have grammatical errors: "+temp);
-					result = false;
-					
-				}else{
-					//不包含
-//					System.out.println("string dont have grammatical errors: "+temp);
-				}
 			}
+				break;
+			}
+			for (int i=0;i<=100;i++){
+				String percent = i+"%";
+				temp = temp.replace(percent, "");
+				percent = i + " %";
+				temp = temp.replace(percent, "");
+				percent = i+" %";
+				temp = temp.replace(percent, "");
+				percent = "%"+i;
+				temp = temp.replace(percent, "");
+				percent = " %"+i;
+				temp = temp.replace(percent, "");
+				percent = " % "+i;
+				temp = temp.replace(percent, "");
+			}
+			if( temp.indexOf("%") >= 0){
+				
+//				System.out.println("string may have grammatical errors: "+temp);
+				result = false;
+				
+			}else{
+				//不包含
+//				System.out.println("string dont have grammatical errors: "+temp);
+			}
+
 			
 			
 		}
 		return result;
 		
 	}
+  
+  
+  /*
+     找到string1中的所有的string2
+     如果没有结果,这个数组为空
+   */
+  public static ArrayList<Integer> findOccrrenceFormString(String string1,String string2){
+	  ArrayList<Integer> result = new ArrayList<>();
+	  int fromIndex = 0;
+	  
+	  while(string1.indexOf(string2, fromIndex) != -1){
+		  int index = string1.indexOf(string2, fromIndex);
+		  result.add(new Integer(index));
+		  fromIndex = index + string2.length();
+	  }
+	  
+	  return result;
+  } 
   
      @SuppressWarnings("unchecked")
     public static Map Dom2Map(Element e){ 
