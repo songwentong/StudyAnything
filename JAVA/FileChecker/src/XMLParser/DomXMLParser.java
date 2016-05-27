@@ -118,8 +118,10 @@ public class DomXMLParser {
 			for (int i=4;i<=100;i++){
 				String percent = i+"%";
 				temp = temp.replace(percent, "");
+				//space1  ,note:space2 is not == space1,dont delete this line
 				percent = i + " %";
 				temp = temp.replace(percent, "");
+				//space2  ,note:space2 is not == space1,dont delete this line
 				percent = i + " %";
 				temp = temp.replace(percent, "");
 				percent = "%"+i;
