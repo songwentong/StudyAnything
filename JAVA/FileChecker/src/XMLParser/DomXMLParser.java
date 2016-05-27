@@ -99,6 +99,8 @@ public class DomXMLParser {
 				temp = temp.replace("%d", "");
 				temp = temp.replace("%s", "");
 				temp = temp.replace("%f", ""); 
+				temp = temp.replace("%1$s", "");
+				temp = temp.replace("%1$d", "");
 			}
 			break;
 			default:
@@ -113,18 +115,16 @@ public class DomXMLParser {
 			}
 				break;
 			}
-			for (int i=0;i<=100;i++){
+			for (int i=4;i<=100;i++){
 				String percent = i+"%";
 				temp = temp.replace(percent, "");
 				percent = i + " %";
 				temp = temp.replace(percent, "");
-				percent = i+" %";
+				percent = i + " %";
 				temp = temp.replace(percent, "");
 				percent = "%"+i;
 				temp = temp.replace(percent, "");
-				percent = " %"+i;
-				temp = temp.replace(percent, "");
-				percent = " % "+i;
+				percent = "% "+i;
 				temp = temp.replace(percent, "");
 			}
 			if( temp.indexOf("%") >= 0){
