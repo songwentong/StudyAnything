@@ -34,6 +34,9 @@ import XMLParser.*;
 public class XMLChecker {
 	public static long checkTime;
 	public static int errorCount;
+	public static ArrayList<String> findAllXMLFilePathes;
+	public static Date startDate;
+	public static Date endDate;
 	public XMLChecker() {
 		// TODO Auto-generated constructor stub
 		super();
@@ -43,6 +46,8 @@ public class XMLChecker {
 	//检查桌面下名字为xml的文件夹下所有的xml文件,遍历筛选字符串
 	public void check(){
 		Thread thread =  new Thread(new Runnable() {
+			private ArrayList<String> findAllXMLFilePathes;
+
 			public void run() {
 				Date date1 = new Date();
 				
@@ -55,7 +60,7 @@ public class XMLChecker {
 					
 				}
 				
-				
+				startDate = date1;
 				System.out.print("check thread start\n" + date1.toString()+"\n");
 //				System.out.println("find the ");
 				
@@ -68,13 +73,20 @@ public class XMLChecker {
 				}
 				
 				ArrayList<String> findAllXMLFilePathes = findAllXMLFilePathesAtPath(path);
-				
-				System.out.print("number of xml files : "+findAllXMLFilePathes.size()+"\n" );
+				this.findAllXMLFilePathes = findAllXMLFilePathes;
+				System.out.print("number of xml files: "+findAllXMLFilePathes.size()+"\n" );
 //				System.out.println("start check");
 				
-				checkFilePathes(findAllXMLFilePathes, 0);
+//				checkFilePathes(this.findAllXMLFilePathes, 0);
+				for(int i=0;i<findAllXMLFilePathes.size();i++){
+					checkFileWithPath(findAllXMLFilePathes.get(i));
+				}
+				
 				date1 = new Date();
-				System.out.println("done, number of lines:"+checkTime +" \nerror count : "+errorCount + "\n" + date1.toString());
+				endDate = date1;
+				long useTime = (endDate.getTime() - startDate.getTime())/1000;
+				System.out.println("---------------------------------------------------------------------------------------------");
+				System.out.println("done, number of lines:"+checkTime +" \nerror count: "+errorCount + "\n" + date1.toString() + " use time(s): "+ useTime);
 			}
 		});
 		thread.start();
