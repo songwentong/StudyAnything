@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+    <string name="accessibility_service_description">اضغط علامة التبديل الموجودة في أعلى اليمين واختر \"OK\" في النافذة المنبثقة لتشغيل خدمة إمكانية الوصول.\n\nيستخدم 360 Security خدمة إمكانية الوصول لتحسين أداء جهازك وضمان تجربة سلسة للمستخدم.\n\nحصلنا على تصديق \"TRUSTE\"، فلا تقلق من تحذيرات الخصوصية. لا يجمع 360 Security أي معلومات شخصية أو حساسة.</string>
+    <string name="accessibility_service_server">الخدمات</string>
+    <string name="accessibility_service_close">إيقاف</string>
+</resources>
