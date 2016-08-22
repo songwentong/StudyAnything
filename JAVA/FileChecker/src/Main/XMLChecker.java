@@ -165,7 +165,7 @@ public class XMLChecker {
 										int n1 = DomXMLParser.numberOfPlaceholdersInString(v1);
 										int n2 = DomXMLParser.numberOfPlaceholdersInString(v2);
 										if (n1 != n2) {
-											System.out.println("找到占位符不同的两个字符串了\n英文路径是:" + englishPath + "\n外文路径是:"
+											System.out.println("strings have different place holders found \nthe english path is:" + englishPath + "\ncurrent path is:"
 													+ currentPath + "\nkey: " + key + "\nenglish value: " + v1
 													+ "\ncurrent value: " + v2);
 										}
@@ -181,7 +181,7 @@ public class XMLChecker {
 						}
 					}
 				}
-
+				System.out.println("find place holder has finished");
 			}
 		});
 		t.start();
