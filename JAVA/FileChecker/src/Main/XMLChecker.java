@@ -1,4 +1,5 @@
 package Main;
+
 import java.awt.List;
 import java.io.BufferedReader;
 import java.io.File;
@@ -37,293 +38,219 @@ public class XMLChecker {
 	public static ArrayList<String> findAllXMLFilePathes;
 	public static Date startDate;
 	public static Date endDate;
+
 	public XMLChecker() {
-		// TODO Auto-generated constructor stub
 		super();
 		checkTime = 0;
 	}
-	
-	//检查桌面下名字为xml的文件夹下所有的xml文件,遍历筛选字符串
-	public void check(){
-		Thread thread =  new Thread(new Runnable() {
+
+	// 根路径 相当于home下的桌面下的xml 就是home/desktop/xml
+	public static String homeDirectory() {
+		String os = System.getProperty("os.name");
+		// 是mac电脑
+		boolean isMac = false;
+		if (os.indexOf("Mac") != -1) {
+			isMac = true;
+		} else {
+
+		}
+
+		FileSystemView fsv = FileSystemView.getFileSystemView();
+		// 将桌面的那个文件目录赋值给file
+		// File desktop=fsv.getHomeDirectory();
+		String path = fsv.getHomeDirectory().getAbsolutePath();
+		if (isMac) {
+			path = path + "/Desktop/xml";
+		} else {
+			path = path + "//xml";
+		}
+
+		return path;
+	}
+
+	// 检查桌面下名字为xml的文件夹下所有的xml文件,遍历筛选字符串
+	public void check() {
+		Thread thread = new Thread(new Runnable() {
 			private ArrayList<String> findAllXMLFilePathes;
 
 			public void run() {
 				Date date1 = new Date();
-				
-				String os = System.getProperty("os.name");
-				//是mac电脑
-				boolean isMac = false;
-				if (os.indexOf("Mac") != -1) {
-					isMac = true;
-				}else{
-					
-				}
-				
 				startDate = date1;
-				System.out.print("check thread start\n" + date1.toString()+"\n");
-//				System.out.println("find the ");
-				
-				FileSystemView fsv=FileSystemView.getFileSystemView();
-				 // 将桌面的那个文件目录赋值给file
-//				File desktop=fsv.getHomeDirectory();
-				String path = fsv.getHomeDirectory().getAbsolutePath() + "/Desktop"; 
-				if (!isMac) {
-					path = fsv.getHomeDirectory().getAbsolutePath()+"//xml";
-				}
-				
-				ArrayList<String> findAllXMLFilePathes = findAllXMLFilePathesAtPath(path);
+				System.out.print("check thread start 开始检查占位符语法是否正确 " + date1.toString() + "\n");
+
+				String home = XMLChecker.homeDirectory();
+				ArrayList<String> findAllXMLFilePathes = findAllXMLFilePathesAtPath(home);
 				this.findAllXMLFilePathes = findAllXMLFilePathes;
-				System.out.print("number of xml files: "+findAllXMLFilePathes.size()+"\n" );
-//				System.out.println("start check");
-				
-//				checkFilePathes(this.findAllXMLFilePathes, 0);
-				for(int i=0;i<findAllXMLFilePathes.size();i++){
+				System.out.print("number of xml files: " + findAllXMLFilePathes.size() + "\n");
+				// System.out.print("all pathes:"+findAllXMLFilePathes);
+				// System.out.println("start check");
+
+				// checkFilePathes(this.findAllXMLFilePathes, 0);
+				for (int i = 0; i < findAllXMLFilePathes.size(); i++) {
 					checkFileWithPath(findAllXMLFilePathes.get(i));
 				}
-				
+
 				date1 = new Date();
 				endDate = date1;
-				long useTime = (endDate.getTime() - startDate.getTime())/1000;
-				System.out.println("---------------------------------------------------------------------------------------------");
-				System.out.println("done, number of lines:"+checkTime +" \nerror count: "+errorCount + "\n" + date1.toString() + " use time(s): "+ useTime);
+				long useTime = (endDate.getTime() - startDate.getTime()) / 1000;
+				System.out.println(
+						"---------------------------------------------------------------------------------------------");
+				System.out.println("done, number of lines:" + checkTime + " \nerror count: " + errorCount + "\n"
+						+ date1.toString() + " use time(s): " + useTime);
 			}
 		});
 		thread.start();
-		
 
 	}
-	
-	
-	
-	/*
-	public ArrayList<String> findAllLanuageDir(){
-		
+
+	// 检查占位符是否和英文的一样
+	public void checkPlaceHolders() {
+		Thread t = new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				// 开始检查占位符是否相等
+				String homeDirectory = XMLChecker.homeDirectory();
+				System.out.println("start checking place holders,home directory:" + homeDirectory);
+				File homeFile = new File(homeDirectory);
+				String[] homeFilelist = homeFile.list();
+
+				ArrayList<String> englishPathes = findAllXMLFilePathesAtPath(homeDirectory + "/en");
+				System.out.println("get the number of xml files at english path:" + englishPathes.size());
+				System.out.println("get all languages:");
+				for (int a = 0; a < englishPathes.size(); a++) {
+
+					String englishPath = englishPathes.get(a);
+					for (int i = 0; i < homeFilelist.length; i++) {
+
+						// current language
+						String currentLanguage = homeFilelist[i];
+						// if get .SD_Store or get English path,do nothing,find
+						// others
+						if (!currentLanguage.equals(".DS_Store") || currentLanguage.equals("en")) {
+							// System.out.println("language:"+currentLanguage);
+							String currentPath = englishPath.replace("/en", "/" + currentLanguage);
+							// System.out.println("English file
+							// path:"+englishPath +" current language path:"+
+							// currentPath);
+							Map<String, Object> englishFile = DomXMLParser.Dom2MapFromPath(englishPath);
+							Map<String, Object> currentFile = DomXMLParser.Dom2MapFromPath(currentPath);
+
+							for (Map.Entry<String, Object> entry : englishFile.entrySet()) {
+								String key = entry.getKey();
+								Object object1 = entry.getValue();
+								Object object2 = currentFile.get(entry.getKey());
+								if (object1 instanceof String && object2 instanceof String) {
+
+									String v1 = (String) entry.getValue();
+									String v2 = (String) currentFile.get(entry.getKey());
+									
+										int n1 = DomXMLParser.numberOfPlaceholdersInString(v1);
+										int n2 = DomXMLParser.numberOfPlaceholdersInString(v2);
+										if (n1 != n2) {
+											System.out.println("找到占位符不同的两个字符串了\n英文路径是:" + englishPath + "\n外文路径是:"
+													+ currentPath + "\nkey: " + key + "\nenglish value: " + v1
+													+ "\ncurrent value: " + v2);
+										}
+									
+
+								} else {
+									//System.out.print("找到不是字符串类型的数据:" + entry.getKey());
+								}
+
+							}
+							// System.out.println(englishFile+currentFile);
+
+						}
+					}
+				}
+
+			}
+		});
+		t.start();
 	}
-	*/
-	
-	public ArrayList<String> findAllXMLFilePathesAtPath(String path){
-		
-		//找到桌面的文件夹  /Users/songwentong/Desktop/xml
+
+	public ArrayList<String> findAllXMLFilePathesAtPath(String path) {
+
+		// 找到桌面的文件夹 /Users/songwentong/Desktop/xml
 		File file = new File(path);
-		//获取文件列表
-		String [] list = file.list();
-		
-		//所有的XML文件路径
-		ArrayList<String> allXMLFilePaths = new ArrayList<>();
-		
-		//如果文件不存在
-		if(list == null){
-			//XML路径找不到
-			return allXMLFilePaths;
-		}else{
-			//从1开始是为了去掉.DS_Store
-			for (int i=0;i<list.length;i++){
+		// 获取文件列表
+		String[] list = file.list();
 
-				
-				if(list[i].equals(".DS_Store")){
-					//如果是DS_Store文件就什么都不做
-				}else{
-					//获取某个语言的路径
-					String languageDir = file.getAbsolutePath() +"/" + list[i];
-					//语言文件的文件夹
+		// 所有的XML文件路径
+		ArrayList<String> allXMLFilePaths = new ArrayList<>();
+
+		// 如果文件不存在
+		if (list == null) {
+			// XML路径找不到
+			return allXMLFilePaths;
+		} else {
+			// 从1开始是为了去掉.DS_Store
+			for (int i = 0; i < list.length; i++) {
+
+				if (list[i].equals(".DS_Store")) {
+					// 如果是DS_Store文件就什么都不做
+				} else {
+					// 获取某个语言的路径
+					String languageDir = file.getAbsolutePath() + "/" + list[i];
+					// 语言文件的文件夹
 					File languageFile = new File(languageDir);
 					if (languageFile.isDirectory()) {
 						allXMLFilePaths.addAll(findAllXMLFilePathesAtPath(languageDir));
-						
-					}else{
-						if(languageDir.indexOf(".xml") != -1){
+
+					} else {
+						if (languageDir.indexOf(".xml") != -1) {
 							allXMLFilePaths.add(languageDir);
 						}
-						
-					}
-					
-				}
-			}
-		}
-		
-		return allXMLFilePaths;
-	}
-	
-	
-	//找到所有的XML目录
-	public ArrayList<String> findAllXMLFilePathes(){
-		FileSystemView fsv=FileSystemView.getFileSystemView();
-		  //将桌面的那个文件目录赋值给file
-		File desktop=fsv.getHomeDirectory();
-		
-		//找到桌面的文件夹  /Users/songwentong/Desktop/xml
-		File file = new File(desktop.getAbsolutePath()+"/Desktop/xml");
-		//获取文件列表
-		String [] list = file.list();
-		
-		//所有的XML文件路径
-		ArrayList<String> allXMLFilePaths = new ArrayList<>();
-		
-		//如果文件不存在
-		if(list == null){
-			//XML路径找不到
-			return allXMLFilePaths;
-		}else{
-			//从1开始是为了去掉.DS_Store
-			for (int i=0;i<list.length;i++){
 
-				
-				if(list[i].equals(".DS_Store")){
-					//如果是DS_Store文件就什么都不做
-				}else{
-					//获取某个语言的路径
-					String languageDir = file.getAbsolutePath() +"/" + list[i];
-					//语言文件的文件夹
-					File languageFile = new File(languageDir);
-					//当前目录下所有的文件
-					String []fileList = languageFile.list();
-					for(int j=0;j<fileList.length;j++){
-						
-						//是包含.xml的文件
-						if(fileList[j].indexOf(".xml") != -1){
-							String filePath = languageDir+"/"+fileList[j];
-							allXMLFilePaths.add(filePath);
-						}
-						
-						}
+					}
+
 				}
 			}
 		}
-		
+
 		return allXMLFilePaths;
 	}
-	
-	
-	//递归读取文件,这样做的目的是防止for循环导致卡死
-	public void checkFilePathes(ArrayList<String> paths,int fromIndex){
+
+	// 递归读取文件,这样做的目的是防止for循环导致卡死
+	public void checkFilePathes(ArrayList<String> paths, int fromIndex) {
 		checkFileWithPath(paths.get(fromIndex));
-		if(fromIndex != paths.size()-1){
-			//如果不是最后一个,就读取下一个
-			checkFilePathes(paths,fromIndex+1);
+		if (fromIndex != paths.size() - 1) {
+			// 如果不是最后一个,就读取下一个
+			checkFilePathes(paths, fromIndex + 1);
 		}
 	}
-	
-	//检查单个文件
-	public void checkFileWithPath(String path){
-		//读取出字符串
-		
-		
-		
-//		String xmlString = XMLChecker.stringFromFilePath(path);
+
+	// 检查单个文件
+	public void checkFileWithPath(String path) {
+		// 读取出字符串
+
+		// String xmlString = XMLChecker.stringFromFilePath(path);
 		Map<String, Object> map = null;
-		try{
-			//解析得到一个map,在解析的过程中调用一下检查吧
+		try {
+			// 解析得到一个map,在解析的过程中调用一下检查吧
 			map = DomXMLParser.XMLObjectFromPath(path);
-		}catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-//		checkMap(map);
+
+		// checkMap(map);
 	}
-	public boolean checkString (String string){
+
+	public boolean checkString(String string) {
 		boolean result = true;
-		if(string != null){
-			
-			//判断是否包含%
-			if( string.indexOf("%%") >= 0){
-				//包含
+		if (string != null) {
+
+			// 判断是否包含%
+			if (string.indexOf("%%") >= 0) {
+				// 包含
 				System.out.println(string);
-			}else{
-				//不包含
+			} else {
+				// 不包含
 			}
 		}
 		return result;
-		
-	}
-	
-//	
-//	// 根据路径得到一个字符串文件
-//	public static String stringFromFilePath(String path){
-//		BufferedReader reader = null;
-//        String result = "";
-//        try {
-//        	File file = new File(path);
-//            
-////            System.out.println("以行为单位读取文件内容，一次读一整行：");
-//            reader = new BufferedReader(new FileReader(file));
-//            String tempString = null;
-////            int line = 1;
-//            // 一次读入一行，直到读入null为文件结束
-//            while ((tempString = reader.readLine()) != null) {
-//            	result = result + tempString;
-//                // 显示行号
-////                System.out.println("line " + line + ": " + tempString);
-////                line++;
-//            }
-//            reader.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//            if (reader != null) {
-//                try {
-//                    reader.close();
-//                } catch (IOException e1) {
-//                }
-//            }
-//        }
-//        return result;
-//	}
-//	
-////	//递归遍历XML结构,并检查语法是否正确
-////	public boolean checkMap(Object xmlObj){
-//		boolean result = false;
-//		if(xmlObj instanceof Map){
-//			
-//			
-//			//如果是map类型,遍历它的数值,然后去检查
-//			Map map = (Map) xmlObj;
-//			Collection c = map.values();
-//			Iterator iter = c.iterator();
-//			Object obj;
-//			while(iter.hasNext()){
-//				obj = iter.next();
-//				//如果检查出这个map中有错误语法
-//				if (checkMap(obj) == false) {
-//					result = false;
-//				}
-//				
-//			}
-//		}
-//		if(xmlObj instanceof ArrayList){
-//			
-////			Iterator iter = 
-//		}
-//		if (xmlObj instanceof String){
-//			String temp = (String)xmlObj;
-//			System.out.println(temp);
-//			//得到检查结果
-//			result = checkString((String)xmlObj);
-//			if (result == false) {
-//				//检查出来有错误的字符 
-//				System.out.println("找到语法错误的字符串" + (String)xmlObj);
-//			}
-//		}
-//		//if map ,遍历
-//		//if String ,判断语法
-//		//if ArrayList,遍历
-//		//其他,通过
-//		return result;
-//	}
-//	
 
-	
+	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-

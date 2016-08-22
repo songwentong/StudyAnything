@@ -3,7 +3,9 @@ import java.util.ArrayList;
 import java.util.HashMap; 
 import java.util.Iterator; 
 import java.util.List; 
-import java.util.Map; 
+import java.util.Map;
+
+import org.dom4j.Attribute;
 import org.dom4j.Document; 
 import org.dom4j.Element; 
 import java.io.FileInputStream;
@@ -44,10 +46,32 @@ public class DomXMLParser {
 		  
 		return doc;
 	}
-	
+	public static Map<String, Object> Dom2MapFromPath(String path){
+		Document doc = docFormPath(path);
+		 Map<String, Object> map = new HashMap<String, Object>(); 
+	      if(doc == null) 
+	          return map; 
+	      Element root = doc.getRootElement(); 
+	      for (Iterator iterator = root.elementIterator(); iterator.hasNext();) { 
+	          Element e = (Element) iterator.next(); 
+	          List list = e.elements(); 
+	          if(list.size() > 0){ 
+	              map.put(e.getName(), Dom2Map(e)); 
+	          }else {
+	        	  String name = e.getName();
+	        	  
+	        	  Attribute a1 = e.attribute(0);
+	        	  String a1v = a1.getValue();
+//	        	  System.out.println("a1v:"+a1v);
+	        	  String text = e.getText();
+	              map.put(a1v, text);
+	          }
+	      } 
+	      return map; 
+	}
 	
   @SuppressWarnings("unchecked")  
-    public static Map<String, Object> Dom2Map(Document doc){ 
+     public static Map<String, Object> Dom2Map(Document doc){ 
         Map<String, Object> map = new HashMap<String, Object>(); 
         if(doc == null) 
             return map; 
@@ -72,6 +96,43 @@ public class DomXMLParser {
         } 
         return map; 
     } 
+
+  public static int numberOfPlaceholderInXMLString(String s){
+	  int number = 0;
+	  
+	  return number;
+  }
+  
+  /**
+   * 所有的可能的占位符 
+   */
+  public static ArrayList<String> allPossibleOfPlaceholders(){
+	  ArrayList<String> a = new ArrayList<String>();
+	  a.add("%d");
+	  a.add("%s");
+	  a.add("%f");
+	  a.add("%1$s");
+	  a.add("%1%d");
+	  a.add("%1$s");
+	  a.add("%2$s");
+	  a.add("%3$s");
+	  a.add("%1$d");
+	  a.add("%2$d");
+	  a.add("%3$d");
+	  return a;
+  }
+  
+  //check the number of place holder in the string
+  public static int numberOfPlaceholdersInString(String string){
+	  //某个字符串中占位符的总数
+	  int r = 0;
+	  ArrayList<String> allPossibleOfPlaceholders = allPossibleOfPlaceholders();
+	  for (int i = 0;i<allPossibleOfPlaceholders.size();i++){
+		  ArrayList<Integer> temp = findOccrrenceFormString(string, allPossibleOfPlaceholders.get(i));
+		  r += temp.size();	  
+	  }
+	  return r;
+  }
   
   /*
    检查字符串是否合法
@@ -155,35 +216,37 @@ public class DomXMLParser {
 	  ArrayList<Integer> result = new ArrayList<>();
 	  int fromIndex = 0;
 	  
-	  while(string1.indexOf(string2, fromIndex) != -1){
-		  int index = string1.indexOf(string2, fromIndex);
-		  result.add(new Integer(index));
-		  fromIndex = index + string2.length();
-	  }
+		  while(string1.indexOf(string2, fromIndex) != -1){
+			  int index = string1.indexOf(string2, fromIndex);
+			  result.add(new Integer(index));
+			  fromIndex = index + string2.length();
+		  }
+	 
+	  
 	  
 	  return result;
   } 
   
      @SuppressWarnings("unchecked")
-    public static Map Dom2Map(Element e){ 
-        Map map = new HashMap(); 
+    public static Map<String, Object> Dom2Map(Element e){ 
+        Map<String, Object> map = new HashMap<String, Object>(); 
         List list = e.elements(); 
         if(list.size() > 0){ 
             for (int i = 0;i < list.size(); i++) { 
                 Element iter = (Element) list.get(i); 
-                List mapList = new ArrayList(); 
+                List<Object> mapList = new ArrayList<Object>(); 
                  
                 if(iter.elements().size() > 0){ 
-                    Map m = Dom2Map(iter); 
+                    Map<String, Object> m = Dom2Map(iter); 
                     if(map.get(iter.getName()) != null){ 
                         Object obj = map.get(iter.getName()); 
                         if(!obj.getClass().getName().equals("java.util.ArrayList")){ 
-                            mapList = new ArrayList(); 
+                            mapList = new ArrayList<Object>(); 
                             mapList.add(obj); 
                             mapList.add(m); 
                         } 
                         if(obj.getClass().getName().equals("java.util.ArrayList")){ 
-                            mapList = (List) obj; 
+                            mapList = (List<Object>) obj; 
                             mapList.add(m); 
                         } 
                         map.put(iter.getName(), mapList); 
@@ -194,12 +257,12 @@ public class DomXMLParser {
                     if(map.get(iter.getName()) != null){ 
                         Object obj = map.get(iter.getName()); 
                         if(!obj.getClass().getName().equals("java.util.ArrayList")){ 
-                            mapList = new ArrayList(); 
+                            mapList = new ArrayList<Object>(); 
                             mapList.add(obj); 
                             mapList.add(iter.getText()); 
                         } 
                         if(obj.getClass().getName().equals("java.util.ArrayList")){ 
-                            mapList = (List) obj; 
+                            mapList = (List<Object>) obj; 
                             mapList.add(iter.getText()); 
                         } 
                         map.put(iter.getName(), mapList); 

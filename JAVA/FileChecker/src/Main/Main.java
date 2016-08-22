@@ -26,6 +26,7 @@ public class Main{
 		
 		XMLChecker checker = new XMLChecker();
 		checker.check();
+		checker.checkPlaceHolders();
 //		String s1 = "aaaa";
 //		String s2 = "a";
 		
