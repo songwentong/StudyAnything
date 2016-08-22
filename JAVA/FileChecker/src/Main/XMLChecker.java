@@ -62,7 +62,7 @@ public class XMLChecker {
 		if (isMac) {
 			path = path + "/Desktop/xml";
 		} else {
-			path = path + "//xml";
+			path = path + "\\xml";
 		}
 
 		return path;
