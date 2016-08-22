@@ -44,6 +44,18 @@ public class XMLChecker {
 		checkTime = 0;
 	}
 
+	public static boolean isMac(){
+		String os = System.getProperty("os.name");
+		// 是mac电脑
+		boolean isMac = false;
+		if (os.indexOf("Mac") != -1) {
+			isMac = true;
+		} else {
+
+		}
+		return isMac;
+	}
+	
 	// 根路径 相当于home下的桌面下的xml 就是home/desktop/xml
 	public static String homeDirectory() {
 		String os = System.getProperty("os.name");
@@ -130,6 +142,11 @@ public class XMLChecker {
 						if (!currentLanguage.equals(".DS_Store") || currentLanguage.equals("en")) {
 							// System.out.println("language:"+currentLanguage);
 							String currentPath = englishPath.replace("/en", "/" + currentLanguage);
+							if (XMLChecker.isMac()) {
+								currentPath = englishPath.replace("/en", "/" + currentLanguage);
+							}else{
+								currentPath = englishPath.replace("\\en", "\\" + currentLanguage);
+							}
 							// System.out.println("English file
 							// path:"+englishPath +" current language path:"+
 							// currentPath);
