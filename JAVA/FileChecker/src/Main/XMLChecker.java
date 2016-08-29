@@ -36,7 +36,7 @@ import XMLParser.*;
 public class XMLChecker {
 	public static long checkTime;
 	public static int errorCount;
-	public static ArrayList<String> findAllXMLFilePathes;
+	//public static ArrayList<String> findAllXMLFilePathes;
 	public static Date startDate;
 	public static Date endDate;
 
@@ -84,21 +84,17 @@ public class XMLChecker {
 	// 检查桌面下名字为xml的文件夹下所有的xml文件,遍历筛选字符串
 	public void check() {
 		Thread thread = new Thread(new Runnable() {
-			private ArrayList<String> findAllXMLFilePathes;
+			
 
 			public void run() {
 				Date date1 = new Date();
 				startDate = date1;
-				System.out.print("check thread start 开始检查占位符语法是否正确 " + date1.toString() + "\n");
+				System.out.print("date:" + date1.toString() + "\n"+"start checking place holder grammer...  \n");
 
 				String home = XMLChecker.homeDirectory();
 				ArrayList<String> findAllXMLFilePathes = findAllXMLFilePathesAtPath(home);
-				this.findAllXMLFilePathes = findAllXMLFilePathes;
+				
 				System.out.print("number of xml files: " + findAllXMLFilePathes.size() + "\n");
-				// System.out.print("all pathes:"+findAllXMLFilePathes);
-				// System.out.println("start check");
-
-				// checkFilePathes(this.findAllXMLFilePathes, 0);
 				for (int i = 0; i < findAllXMLFilePathes.size(); i++) {
 					checkFileWithPath(findAllXMLFilePathes.get(i));
 				}
@@ -108,7 +104,7 @@ public class XMLChecker {
 				long useTime = (endDate.getTime() - startDate.getTime()) / 1000;
 				System.out.println(
 						"---------------------------------------------------------------------------------------------");
-				System.out.println("done, number of lines:" + checkTime + " \nerror count: " + errorCount + "\n"
+				System.out.println("grammar check finished, number of lines:" + checkTime + " error count: " + errorCount + "\n"
 						+ date1.toString() + " use time(s): " + useTime);
 			}
 		});
@@ -122,9 +118,13 @@ public class XMLChecker {
 
 			@Override
 			public void run() {
+				
+				int errorCount = 0;
+				int checkPlaceHoldersCount = 0;
+				
 				// 开始检查占位符是否相等
 				String homeDirectory = XMLChecker.homeDirectory();
-				System.out.println("start checking place holders,home directory:" + homeDirectory);
+				System.out.println("start checking place holders equal... \n"+"home directory:" + homeDirectory);
 				File homeFile = new File(homeDirectory);
 				String[] homeFilelist = homeFile.list();
 
@@ -163,8 +163,8 @@ public class XMLChecker {
 									String v1 = (String) entry.getValue();
 									String v2 = (String) currentFile.get(entry.getKey());
 									
-									HashMap<String, Integer> map1 = DomXMLParser.findPlaceholdersInString(v1);
-									HashMap<String, Integer> map2 = DomXMLParser.findPlaceholdersInString(v2);
+									HashMap<String, Integer> map1 = DomXMLParser.findPlaceholdersInString(v1.toLowerCase());
+									HashMap<String, Integer> map2 = DomXMLParser.findPlaceholdersInString(v2.toLowerCase());
 									
 									Set<String>ssssss =  map1.keySet();
 									Boolean equal = true;
@@ -174,13 +174,16 @@ public class XMLChecker {
 										if (vv1 != vv2) {
 											equal = false;
 										}
+										
 									}  
 									if (!equal) {
+										
 										System.out.println("strings have different place holders found \nthe english path is:" + englishPath + "\ncurrent path is:"
 												+ currentPath + "\nkey: " + key + "\nenglish value: " + v1
 												+ "\ncurrent value: " + v2);
+										errorCount ++;
 									}
-							
+									checkPlaceHoldersCount++;
 									
 									
 
@@ -194,7 +197,9 @@ public class XMLChecker {
 						}
 					}
 				}
-				System.out.println("find place holder has finished");
+				System.out.println(
+						"---------------------------------------------------------------------------------------------");
+				System.out.println("find place holder equal has finished" +" checkcount:"+checkPlaceHoldersCount +"  errorCount:" + errorCount);
 			}
 		});
 		t.start();
