@@ -122,6 +122,21 @@ public class DomXMLParser {
 	  return a;
   }
   
+  public static String placeholderIndexStringFromString(String string){
+	  
+	  return null;
+  }
+  
+  public static HashMap<String, Integer> findPlaceholdersInString(String string){
+	  ArrayList<String> allPossibleOfPlaceholders = allPossibleOfPlaceholders();
+	  HashMap<String, Integer> aaa = new HashMap<String, Integer>();
+	  for (int i = 0;i<allPossibleOfPlaceholders.size();i++){
+		  ArrayList<Integer> temp = findOccrrenceFormString(string, allPossibleOfPlaceholders.get(i));
+		  aaa.put(allPossibleOfPlaceholders.get(i),	temp.size());
+	  }
+	  return aaa;
+  }
+  
   //check the number of place holder in the string
   public static int numberOfPlaceholdersInString(String string){
 	  //某个字符串中占位符的总数

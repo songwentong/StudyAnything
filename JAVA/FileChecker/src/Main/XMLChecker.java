@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.swing.filechooser.FileSystemView;
 import com.thoughtworks.xstream.XStream;
@@ -162,13 +163,25 @@ public class XMLChecker {
 									String v1 = (String) entry.getValue();
 									String v2 = (String) currentFile.get(entry.getKey());
 									
-										int n1 = DomXMLParser.numberOfPlaceholdersInString(v1);
-										int n2 = DomXMLParser.numberOfPlaceholdersInString(v2);
-										if (n1 != n2) {
-											System.out.println("strings have different place holders found \nthe english path is:" + englishPath + "\ncurrent path is:"
-													+ currentPath + "\nkey: " + key + "\nenglish value: " + v1
-													+ "\ncurrent value: " + v2);
+									HashMap<String, Integer> map1 = DomXMLParser.findPlaceholdersInString(v1);
+									HashMap<String, Integer> map2 = DomXMLParser.findPlaceholdersInString(v2);
+									
+									Set<String>ssssss =  map1.keySet();
+									Boolean equal = true;
+									for (String str : ssssss) {  
+										Integer vv1 = map1.get(str);
+										Integer vv2 = map2.get(str);
+										if (vv1 != vv2) {
+											equal = false;
 										}
+									}  
+									if (!equal) {
+										System.out.println("strings have different place holders found \nthe english path is:" + englishPath + "\ncurrent path is:"
+												+ currentPath + "\nkey: " + key + "\nenglish value: " + v1
+												+ "\ncurrent value: " + v2);
+									}
+							
+									
 									
 
 								} else {
