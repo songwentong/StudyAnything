@@ -94,7 +94,7 @@ public class XMLChecker {
 				String home = XMLChecker.homeDirectory();
 				ArrayList<String> findAllXMLFilePathes = findAllXMLFilePathesAtPath(home);
 				
-				System.out.print("number of xml files: " + findAllXMLFilePathes.size() + "\n");
+				System.out.print("number of xml files: " + findAllXMLFilePathes.size() + "\n\n");
 				for (int i = 0; i < findAllXMLFilePathes.size(); i++) {
 					checkFileWithPath(findAllXMLFilePathes.get(i));
 				}
@@ -130,7 +130,8 @@ public class XMLChecker {
 
 				ArrayList<String> englishPathes = findAllXMLFilePathesAtPath(homeDirectory + "/en");
 				System.out.println("get the number of xml files at english path:" + englishPathes.size());
-				System.out.println("get all languages:");
+				
+				
 				for (int a = 0; a < englishPathes.size(); a++) {
 
 					String englishPath = englishPathes.get(a);
@@ -178,9 +179,9 @@ public class XMLChecker {
 									}  
 									if (!equal) {
 										
-										System.out.println("strings have different place holders found \nthe english path is:" + englishPath + "\ncurrent path is:"
+										System.out.println("strings have different place holders found: \nenglish path is:" + englishPath + "\ncurrent path is:"
 												+ currentPath + "\nkey: " + key + "\nenglish value: " + v1
-												+ "\ncurrent value: " + v2);
+												+ "\ncurrent value: " + v2 + "\n");
 										errorCount ++;
 									}
 									checkPlaceHoldersCount++;
