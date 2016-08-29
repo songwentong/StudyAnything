@@ -199,7 +199,7 @@ public class XMLChecker {
 				}
 				System.out.println(
 						"---------------------------------------------------------------------------------------------");
-				System.out.println("find place holder equal has finished" +" checkcount:"+checkPlaceHoldersCount +"  errorCount:" + errorCount);
+				System.out.println("find place holder equal has finished" +" checkcount:"+checkPlaceHoldersCount +"  error count:" + errorCount);
 			}
 		});
 		t.start();
