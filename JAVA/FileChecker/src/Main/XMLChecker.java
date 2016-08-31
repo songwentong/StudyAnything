@@ -83,10 +83,10 @@ public class XMLChecker {
 
 	// 检查桌面下名字为xml的文件夹下所有的xml文件,遍历筛选字符串
 	public void check() {
-		Thread thread = new Thread(new Runnable() {
+//		Thread thread = new Thread(new Runnable() {
 			
 
-			public void run() {
+//			public void run() {
 				Date date1 = new Date();
 				startDate = date1;
 				System.out.print("date:" + date1.toString() + "\n"+"start checking place holder grammer...  \n");
@@ -106,18 +106,20 @@ public class XMLChecker {
 						"---------------------------------------------------------------------------------------------");
 				System.out.println("grammar check finished, number of lines:" + checkTime + " error count: " + errorCount + "\n"
 						+ date1.toString() + " use time(s): " + useTime);
-			}
-		});
-		thread.start();
+				System.out.println(
+						"---------------------------------------------------------------------------------------------"+ "\n");
+//			}
+//		});
+//		thread.start();
 
 	}
 
 	// 检查占位符是否和英文的一样
 	public void checkPlaceHolders() {
-		Thread t = new Thread(new Runnable() {
+//		Thread t = new Thread(new Runnable() {
 
-			@Override
-			public void run() {
+//			@Override
+//			public void run() {
 				
 				int errorCount = 0;
 				int checkPlaceHoldersCount = 0;
@@ -201,9 +203,9 @@ public class XMLChecker {
 				System.out.println(
 						"---------------------------------------------------------------------------------------------");
 				System.out.println("find place holder equal has finished" +" checkcount:"+checkPlaceHoldersCount +"  error count:" + errorCount);
-			}
-		});
-		t.start();
+//			}
+//		});
+//		t.start();
 	}
 
 	public ArrayList<String> findAllXMLFilePathesAtPath(String path) {
