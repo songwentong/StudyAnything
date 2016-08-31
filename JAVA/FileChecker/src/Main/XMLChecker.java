@@ -36,7 +36,6 @@ import XMLParser.*;
 public class XMLChecker {
 	public static long checkTime;
 	public static int errorCount;
-	//public static ArrayList<String> findAllXMLFilePathes;
 	public static Date startDate;
 	public static Date endDate;
 
