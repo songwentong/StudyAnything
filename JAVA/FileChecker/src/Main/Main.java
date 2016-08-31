@@ -24,9 +24,18 @@ public class Main{
 		
 		
 		
-		XMLChecker checker = new XMLChecker();
-		checker.check();
-		checker.checkPlaceHolders();
+		final XMLChecker checker = new XMLChecker();
+		Thread t = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				checker.check();
+				checker.checkPlaceHolders();
+			}
+		});
+		t.start();
+		
 //		String s1 = "aaaa";
 //		String s2 = "a";
 		
