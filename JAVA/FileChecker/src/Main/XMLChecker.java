@@ -146,7 +146,7 @@ public class XMLChecker {
 
 				//得到英文的路径下所有的文件
 				ArrayList<String> englishPathes = findAllXMLFilePathesAtPath(homeDirectory + "/en");
-				System.out.println("get the number of xml files at english path:" + englishPathes.size());
+				System.out.println("get the number of xml files at english path:" + englishPathes.size()+"\n");
 				
 				//遍历英文文件
 				for (int a = 0; a < englishPathes.size(); a++) {
