@@ -80,11 +80,16 @@ public class XMLChecker {
 		return path;
 	}
 
+	public void printDate(){
+		Date date1 = new Date();
+		System.out.println("print Date:" + date1.toString());
+	}
+	
 	// 检查桌面下名字为xml的文件夹下所有的xml文件,遍历筛选字符串
 	public void check() {
 				Date date1 = new Date();
 				startDate = date1;
-				System.out.print("date:" + date1.toString() + "\n"+"start checking place holder grammer...  \n");
+				System.out.print("start checking place holder grammer...  \n");
 
 				String home = XMLChecker.homeDirectory();
 				ArrayList<String> findAllXMLFilePathes = findAllXMLFilePathesAtPath(home);
@@ -190,7 +195,9 @@ public class XMLChecker {
 				}
 				System.out.println(
 						"---------------------------------------------------------------------------------------------");
-				System.out.println("find place holder equal has finished" +" checkcount:"+checkPlaceHoldersCount +"  error count:" + errorCount);
+				System.out.println("find place holder equal has finished" +" check count:"+checkPlaceHoldersCount +"  error count:" + errorCount);
+				System.out.println(
+						"---------------------------------------------------------------------------------------------");
 	}
 
 	public ArrayList<String> findAllXMLFilePathesAtPath(String path) {

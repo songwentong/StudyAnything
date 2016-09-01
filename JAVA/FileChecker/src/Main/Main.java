@@ -30,8 +30,10 @@ public class Main{
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
+				checker.printDate();
 				checker.check();
 				checker.checkPlaceHolders();
+				checker.printDate();
 			}
 		});
 		t.start();
