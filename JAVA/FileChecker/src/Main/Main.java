@@ -24,12 +24,13 @@ public class Main{
 		
 		
 		
-		final XMLChecker checker = new XMLChecker();
+		
 		Thread t = new Thread(new Runnable() {
 			
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
+				XMLChecker checker = new XMLChecker();
 				checker.printDate();
 				checker.check();
 				checker.checkPlaceHolders();
