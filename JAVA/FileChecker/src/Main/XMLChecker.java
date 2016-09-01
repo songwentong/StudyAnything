@@ -36,7 +36,6 @@ import XMLParser.*;
 
 
 /*
- 
  XMLChecker 是一个占位符检查器,用来检查安卓开发的语言文件中的占位符的问题.
 
  本类有两个功能
@@ -98,17 +97,26 @@ public class XMLChecker {
 		System.out.println("print Date:" + date1.toString());
 	}
 	
-	// 检查桌面下名字为xml的文件夹下所有的xml文件,遍历筛选字符串
+
+	/*
+	检查桌面下名字为xml的文件夹下所有的xml文件,遍历筛选字符串
+	 
+	 
+	 */
 	public void check() {
 				Date date1 = new Date();
 				startDate = date1;
 				System.out.print("start checking place holder grammer...  \n");
 
 				String home = XMLChecker.homeDirectory();
+				//得到home路径下所有的xml文件
 				ArrayList<String> findAllXMLFilePathes = findAllXMLFilePathesAtPath(home);
 				
 				System.out.print("number of xml files: " + findAllXMLFilePathes.size() + "\n\n");
+				//遍历该数组,挨个检查
 				for (int i = 0; i < findAllXMLFilePathes.size(); i++) {
+					
+					//根据文件路径来检查
 					checkFileWithPath(findAllXMLFilePathes.get(i));
 				}
 
@@ -136,47 +144,59 @@ public class XMLChecker {
 				File homeFile = new File(homeDirectory);
 				String[] homeFilelist = homeFile.list();
 
+				//得到英文的路径下所有的文件
 				ArrayList<String> englishPathes = findAllXMLFilePathesAtPath(homeDirectory + "/en");
 				System.out.println("get the number of xml files at english path:" + englishPathes.size());
 				
-				
+				//遍历英文文件
 				for (int a = 0; a < englishPathes.size(); a++) {
 
 					String englishPath = englishPathes.get(a);
+					//遍历home路径下所有的文件
 					for (int i = 0; i < homeFilelist.length; i++) {
 
 						// current language
 						String currentLanguage = homeFilelist[i];
-						// if get .SD_Store or get English path,do nothing,find
-						// others
+						// if get .SD_Store or get English path,do nothing,find others
 						if (!currentLanguage.equals(".DS_Store") || currentLanguage.equals("en")) {
-							// System.out.println("language:"+currentLanguage);
+							
 							String currentPath = englishPath.replace("/en", "/" + currentLanguage);
+							
+							//如果是mac
 							if (XMLChecker.isMac()) {
+								//把英文换成当前路径
 								currentPath = englishPath.replace("/en", "/" + currentLanguage);
 							}else{
+								//把英文换成当前路径
 								currentPath = englishPath.replace("\\en", "\\" + currentLanguage);
 							}
-							// System.out.println("English file
-							// path:"+englishPath +" current language path:"+
-							// currentPath);
+							
+							//英文路径解析的数据
 							Map<String, Object> englishFile = DomXMLParser.Dom2MapFromPath(englishPath);
+							//当前路径解析的数据
 							Map<String, Object> currentFile = DomXMLParser.Dom2MapFromPath(currentPath);
 
+							//遍历英文的数据
 							for (Map.Entry<String, Object> entry : englishFile.entrySet()) {
+								//得到key
 								String key = entry.getKey();
+								//得到英文数据
 								Object object1 = entry.getValue();
+								//得到当前的数据
 								Object object2 = currentFile.get(entry.getKey());
+								//如果两条数据都是字符串类型
 								if (object1 instanceof String && object2 instanceof String) {
-
+									//强制转换这两条字符串的类型
 									String v1 = (String) entry.getValue();
 									String v2 = (String) currentFile.get(entry.getKey());
-									
+									//得到解析出的数据
 									HashMap<String, Integer> map1 = DomXMLParser.findPlaceholdersInString(v1.toLowerCase());
 									HashMap<String, Integer> map2 = DomXMLParser.findPlaceholdersInString(v2.toLowerCase());
-									
+									//得到key
 									Set<String>ssssss =  map1.keySet();
+									//是否相当
 									Boolean equal = true;
+									//遍历该set
 									for (String str : ssssss) {  
 										Integer vv1 = map1.get(str);
 										Integer vv2 = map2.get(str);
