@@ -29,7 +29,6 @@ public class Main{
 			
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				XMLChecker checker = new XMLChecker();
 				checker.printDate();
 				checker.check();
