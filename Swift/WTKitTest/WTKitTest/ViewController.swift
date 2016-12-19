@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import WTKit
 class ViewController: UIViewController {
 
     override func viewDidLoad() {

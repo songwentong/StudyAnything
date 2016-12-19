@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		98AF69A251E855A805D90215 /* Pods_WTKitTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5073311ECC2E67CE59E885CA /* Pods_WTKitTest.framework */; };
 		E1C0C9591E078FE2000B8F50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C0C9581E078FE2000B8F50 /* AppDelegate.swift */; };
 		E1C0C95B1E078FE2000B8F50 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C0C95A1E078FE2000B8F50 /* ViewController.swift */; };
 		E1C0C95E1E078FE2000B8F50 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1C0C95C1E078FE2000B8F50 /* Main.storyboard */; };
@@ -15,6 +16,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5073311ECC2E67CE59E885CA /* Pods_WTKitTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WTKitTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CA593E9F8B24012F015087D /* Pods-WTKitTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WTKitTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WTKitTest/Pods-WTKitTest.debug.xcconfig"; sourceTree = "<group>"; };
+		BD9CADEAE67A37C9E85A4674 /* Pods-WTKitTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WTKitTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-WTKitTest/Pods-WTKitTest.release.xcconfig"; sourceTree = "<group>"; };
 		E1C0C9551E078FE2000B8F50 /* WTKitTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WTKitTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1C0C9581E078FE2000B8F50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1C0C95A1E078FE2000B8F50 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,17 +33,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98AF69A251E855A805D90215 /* Pods_WTKitTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B58205A06872662331F4A4E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5073311ECC2E67CE59E885CA /* Pods_WTKitTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		99F0FF5D48B7143C2CB781FC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5CA593E9F8B24012F015087D /* Pods-WTKitTest.debug.xcconfig */,
+				BD9CADEAE67A37C9E85A4674 /* Pods-WTKitTest.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E1C0C94C1E078FE2000B8F50 = {
 			isa = PBXGroup;
 			children = (
 				E1C0C9571E078FE2000B8F50 /* WTKitTest */,
 				E1C0C9561E078FE2000B8F50 /* Products */,
+				99F0FF5D48B7143C2CB781FC /* Pods */,
+				0B58205A06872662331F4A4E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E1C0C9671E078FE2000B8F50 /* Build configuration list for PBXNativeTarget "WTKitTest" */;
 			buildPhases = (
+				D628C9AEE8887B7D98E372FA /* [CP] Check Pods Manifest.lock */,
 				E1C0C9511E078FE2000B8F50 /* Sources */,
 				E1C0C9521E078FE2000B8F50 /* Frameworks */,
 				E1C0C9531E078FE2000B8F50 /* Resources */,
+				958F97C76D7F3A346B905D31 /* [CP] Embed Pods Frameworks */,
+				1890F24FB12BD32D40588B8B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -131,6 +158,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1890F24FB12BD32D40588B8B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WTKitTest/Pods-WTKitTest-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		958F97C76D7F3A346B905D31 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WTKitTest/Pods-WTKitTest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D628C9AEE8887B7D98E372FA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E1C0C9511E078FE2000B8F50 /* Sources */ = {
@@ -257,6 +332,7 @@
 		};
 		E1C0C9681E078FE2000B8F50 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5CA593E9F8B24012F015087D /* Pods-WTKitTest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = QZFW9RQ778;
@@ -270,6 +346,7 @@
 		};
 		E1C0C9691E078FE2000B8F50 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD9CADEAE67A37C9E85A4674 /* Pods-WTKitTest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = QZFW9RQ778;

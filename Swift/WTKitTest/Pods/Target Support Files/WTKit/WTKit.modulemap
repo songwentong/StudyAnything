@@ -1,0 +1,6 @@
+framework module WTKit {
+  umbrella header "WTKit-umbrella.h"
+
+  export *
+  module * { export * }
+}
