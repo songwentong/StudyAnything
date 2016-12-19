@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+
+		<!--居中风格-->
+		<style>
+			canvas {
+				display: block;
+				position: absolute;
+				border: 1px solid #000;
+				margin: auto;
+				top: 0;
+				bottom: 0;
+				right: 0;
+				left: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+<script>
+var canvas;
+var COLS=26,ROWS=26;
+var ctx;
+var frames;
+var keystate;
+var score,
+
+grid={
+	width:null,
+	height:null,
+	_grid:null;
+	
+};
+
+function main(){
+	canvas = document.createElement("canvas");
+	canvas.width = COLS*20;
+	canvas.height = ROWS*20;
+	ctx = canvas.getContext("2d");
+	window.body.appendChild(canvas);
+	ctx.font = "12px Helvetica";
+	frames=0;
+	keystate={};
+	
+	document.addEventListener("keydown",function(event){
+		keystate[event.keyCode] = true;
+	});
+	document.addEventListener("keyup",function(event){
+		delete keystate[event.keyCode];
+	});
+	
+	init();
+	loop();
+}
+
+function init(){
+	score = 0;
+	
+	
+	
+}
+function loop(){
+	
+	
+	
+}
+
+main();
+
+
+</script>
+	</body>
+
+</html>

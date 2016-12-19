@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>FlappyJS</title>
+    <script src="sprite.js"></script>
+    <!-- 注释 -->
+    <!---->
+    <style>
+      
+        /*CSS样式   定义了画布的属性 */
+        canvas{
+            display: block;
+            position: absolute;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+            left:  0;
+            right: 0;
+        }
+        /*<canvas>djsada.css</canvas>*/
+    </style>
+</head>
+<body>
+
+    
+<!-- 注释:如果没有JS,告知用户 -->
+<noscript>
+<p>For full functionality of this page it is necessary to enable JavaScript.
+Here are the <a href="http://www.enable-javascript.com/" target="_blank">
+instructions how to enable JavaScript in your web browser</a>.</p>
+</noscript>
+    
+<script>
+
+//声明若干变量
+var
+//画布
+cancas,
+ctx,
+width,
+height,
+fgpos=0,
+frames=0,
+score=0,
+best=localStorage.getItem("best")||0,
+currentstate,
+states = {
+	Splash: 0, Game: 1, Score: 2
+},
+
+okBtn,
+bird = {
+
+	x: 60,
+	y: 0,
+
+	//扇翅膀的状态
+	frame: 0,
+	velocity: 0,
+	animation: [0, 1, 2, 1], // animation sequence  ,动画队列是0,1,2,1 为的是让鸟看起来是动的
+
+	rotation: 0,
+	radius: 12,
+
+	gravity: 0.25,
+	_jump: 4.6,
+
+	/**
+	 * 扇翅膀,把速度改成跳动的速度
+	 */
+	jump: function() {
+		this.velocity = -this._jump;
+	},
+
+	/**
+	 * 更新小鸟的动画和位置
+	 */
+	update: function() {
+		// make sure animation updates and plays faster in gamestate
+		var n = currentstate === states.Splash ? 10 : 5;
+		this.frame += frames % n === 0 ? 1 : 0;
+		this.frame %= this.animation.length;
+
+		// in splash state make bird hover up and down and set
+		// rotation to zero
+		if (currentstate === states.Splash) {
+
+			this.y = height - 280 + 5*Math.cos(frames/10);
+			this.rotation = 0;
+
+		} else { // game and score state //
+			//每次更新,速度 = 速度 + 重力加速度
+			this.velocity += this.gravity;
+			//位置 = 位置 + 速度
+			this.y += this.velocity;
+			
+			//限制小鸟的最大飞行高度无法废除屏幕外
+			if(this.y<10){
+				this.y=10;
+			}
+
+			// change to the score state when bird touches the ground  接触地面后,改变游戏状态
+			if (this.y >= height - s_fg.height-10) {
+				
+				//静止,防止小鸟运动
+				this.y = height - s_fg.height-10;
+				
+				//改变游戏状态为得分状态
+				if (currentstate === states.Game) {
+					currentstate = states.Score;
+				}
+				// sets velocity to jump speed for correct rotation  速度设置为跳动时候的速度
+				this.velocity = this._jump;
+			}
+
+			// when bird lack upward momentum increment the rotation
+			// angle,缺乏上行的力量调整角度
+			if (this.velocity >= this._jump) {
+				//改为第一个图
+				this.frame = 1;
+				//调整旋转的角度为乡下
+				this.rotation = Math.min(Math.PI/2, this.rotation + 0.3);
+
+			} else {
+				//否则就向上
+				this.rotation = -0.3;
+
+			}
+		}
+	},
+
+	/**
+	 * Draws bird with rotation to canvas ctx
+	 *  画出小鸟
+	 * @param  {CanvasRenderingContext2D} ctx the context used for
+	 *                                        drawing
+	 */
+	draw: function(ctx) {
+		//保存上下文的状态
+		ctx.save();
+		// translate and rotate ctx coordinatesystem   转换到当前的坐标系
+		ctx.translate(this.x, this.y);
+		//转换到当前的角度
+		ctx.rotate(this.rotation);
+		
+		//获取当前扇翅膀的状态
+		var n = this.animation[this.frame];
+		// draws the bird with center in origo   把鸟花到中间位置
+		s_bird[n].draw(ctx, -s_bird[n].width/2, -s_bird[n].height/2);
+		console.log(n);
+		//还原上下文的状态
+		ctx.restore();
+	}
+};
+
+/**
+ * 若干的障碍
+ */
+pipes = {
+	//所有的障碍,间距是90
+	_pipes: [],
+	// padding: 80, // TODO: Implement paddle variable
+
+	/**
+	 * Empty pipes array
+	 */
+	reset: function() {
+		this._pipes = [];
+	},
+
+	/**
+	 * 更新这些
+	 * Create, push and update all pipes in pipe array
+	 */
+	update: function() {
+		// 100帧增加一对上下的障碍
+		if (frames % 100 === 0) {
+			// calculate y position   随机得出一个Y坐标
+			var _y = height - (s_pipeSouth.height+s_fg.height+120+200*Math.random());
+			// create and push pipe to array
+			// 创建,添加对应的位置
+			this._pipes.push({
+				x: 500,
+				y: _y,
+				width: s_pipeSouth.width,
+				height: s_pipeSouth.height
+			});
+		}
+		
+		//遍历所有的障碍
+		for (var i = 0, len = this._pipes.length; i < len; i++) {
+			//拿到障碍
+			var p = this._pipes[i];
+		
+			//如果i是0
+			if (i === 0) {
+				
+				score += p.x === bird.x ? 1 : 0;
+
+				// collision check, calculates x/y difference and
+				// use normal vector length calculation to determine
+				// intersection
+				var cx  = Math.min(Math.max(bird.x, p.x), p.x+p.width);
+				var cy1 = Math.min(Math.max(bird.y, p.y), p.y+p.height);
+				var cy2 = Math.min(Math.max(bird.y, p.y+p.height+80), p.y+2*p.height+80);
+				// closest difference
+				var dx  = bird.x - cx;
+				var dy1 = bird.y - cy1;
+				var dy2 = bird.y - cy2;
+				// vector length
+				var d1 = dx*dx + dy1*dy1;
+				var d2 = dx*dx + dy2*dy2;
+				var r = bird.radius*bird.radius;
+				// determine intersection  检查碰撞
+				if (r > d1 || r > d2) {
+					//游戏结束
+					currentstate = states.Score;
+				}
+			}
+			// move pipe and remove if outside of canvas
+			p.x -= 2;
+			if (p.x < -p.width) {
+				this._pipes.splice(i, 1);
+				i--;
+				len--;
+			}
+		}
+	},
+
+	/**
+	 * Draw all pipes to canvas context.
+	 * 
+	 * @param  {CanvasRenderingContext2D} ctx the context used for
+	 *                                        drawing
+	 */
+	draw: function(ctx) {
+		for (var i = 0, len = this._pipes.length; i < len; i++) {
+			var p = this._pipes[i];
+			s_pipeSouth.draw(ctx, p.x, p.y);
+			s_pipeNorth.draw(ctx, p.x, p.y+80+p.height);
+		}
+	}
+};
+
+
+/**
+ * 点击事件
+ * @param {Object} evt
+ */
+function onpress(evt) {
+
+	switch (currentstate) {
+
+		// 如果是游戏前,就开始游戏,并且条一下
+		case states.Splash:
+			currentstate = states.Game;
+			bird.jump();
+			break;
+
+		// 如果是游戏中,就跳
+		case states.Game:
+			bird.jump();
+			break;
+
+		// 得分画面
+		case states.Score:
+			// get event position
+			//获得状态的坐标
+			var mx = evt.offsetX, my = evt.offsetY;
+
+			//
+			if (mx == null || my == null) {
+				mx = evt.touches[0].clientX;
+				my = evt.touches[0].clientY;
+			}
+
+			// 点击ok按钮后
+			if (okbtn.x < mx && mx < okbtn.x + okbtn.width &&
+				okbtn.y < my && my < okbtn.y + okbtn.height
+			) {
+				//把障碍置空
+				pipes.reset();
+				//状态改为游戏开始前
+				currentstate = states.Splash;
+				//分数设置为0
+				score = 0;
+			}
+			break;
+
+	}
+}
+
+/**
+ * main 方法
+ */
+function main() {
+	//DOM: 动态创建一个标签,标签名是canvas
+	canvas = document.createElement("canvas");
+	//获取屏幕宽高
+	width = window.innerWidth;
+	height = window.innerHeight;
+
+	var evt = "touchstart";
+	
+	//如果屏幕宽度大于500,就把width设置成320,高度设置成490
+	if (width >= 500) {
+		width  = 320;
+		height = 480;
+		canvas.style.border = "1px solid #000";
+		evt = "mousedown";
+	}
+
+	// 给当前文档添加点击事件响应
+	document.addEventListener(evt, onpress);
+
+	//设置画布的宽高为width何height
+	canvas.width = width;
+	canvas.height = height;
+	
+	//检测是否可以获得2d图形上下文
+	if (!(!!canvas.getContext && canvas.getContext("2d"))) {
+		alert("Your browser doesn't support HTML5, please update to latest version");
+	}
+	
+	//获得2d的图形上下文
+	ctx = canvas.getContext("2d");
+
+	//初始化状态为游戏前
+	currentstate = states.Splash;
+	// append canvas to document,将canvas加入到文档里面
+	document.body.appendChild(canvas);
+
+	// initate graphics and okbtn  初始化图片
+	var img = new Image();
+	
+	//图片加载完成后执行的方法
+	img.onload = function() {
+		//初始化对象
+		initSprites(this);
+		
+		//上下文的填充风格是背景色
+		ctx.fillStyle = s_bg.color;
+	// okbtton的位置
+		okbtn = {
+			x: (width - s_buttons.Ok.width)/2,
+			y: height - 200,
+			width: s_buttons.Ok.width,
+			height: s_buttons.Ok.height
+		}
+	
+	//执行run的循环
+		run();
+	}
+//	设置图片资源路径,加载
+	img.src = "res/sheet.png";
+}
+
+function run() {
+	var loop = function() {
+		update();
+		render();
+		window.requestAnimationFrame(loop, canvas);
+	}
+	window.requestAnimationFrame(loop, canvas);
+}
+
+//刷新方法
+function update() {
+	frames++;
+
+	//如果不是得分画面
+	if (currentstate !== states.Score) {
+		//
+		fgpos = (fgpos - 2) % 14;
+	} else {
+		// set best score to maximum score  刷新一下最高分的记录
+		best = Math.max(best, score);
+		
+		//本地保存一下最高分
+		localStorage.setItem("best", best);
+	}
+	
+	//如果在游戏中
+	if (currentstate === states.Game) {
+		//更新一下障碍的位置
+		pipes.update();
+	}
+
+	//更新一下小鸟的位置
+	bird.update();
+}
+
+/**
+ * 绘制方法
+ */
+function render() {
+	// draw background color  绘制背景颜色
+	ctx.fillRect(0, 0, width, height);
+	// draw background sprites   画背景的图
+	s_bg.draw(ctx, 0, height - s_bg.height);
+	s_bg.draw(ctx, s_bg.width, height - s_bg.height);
+
+	//画障碍
+	pipes.draw(ctx);
+	//画鸟
+	bird.draw(ctx);
+
+	// draw forground sprites  画前景的图
+	s_fg.draw(ctx, fgpos, height - s_fg.height);
+	//
+	s_fg.draw(ctx, fgpos+s_fg.width, height - s_fg.height);
+	
+	//  获取中间的位置
+	var width2 = width/2; // center of canvas
+
+	//游戏开始前
+	if (currentstate === states.Splash) {
+		// draw splash text and sprite to canvas   画文字和小鸟
+		s_splash.draw(ctx, width2 - s_splash.width/2, height - 300);
+		s_text.GetReady.draw(ctx, width2 - s_text.GetReady.width/2, height-380);
+
+	}
+	
+	//得分画面
+	if (currentstate === states.Score) {
+		// draw gameover text and score board  画游戏结束文字和的分板
+		s_text.GameOver.draw(ctx, width2 - s_text.GameOver.width/2, height-400);
+		s_score.draw(ctx, width2 - s_score.width/2, height-340);
+		s_buttons.Ok.draw(ctx, okbtn.x, okbtn.y);
+		// draw score and best inside the score board  花分数和最高分
+		s_numberS.draw(ctx, width2-47, height-304, score, null, 10);
+		s_numberS.draw(ctx, width2-47, height-262, best, null, 10);
+
+	} else {
+		// draw score to top of canvas   在顶部画分数
+		s_numberB.draw(ctx, null, 20, score, width2);
+
+	}
+}
+main();
+</script>
+</body>
+
+</html>

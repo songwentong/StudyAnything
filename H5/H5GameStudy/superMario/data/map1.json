@@ -1,0 +1,16 @@
+/*
+screenSize:(640*480)
+land:陆地(x,y,宽高)
+brick:砖块(x,y,宽高)
+pipe:管道(x,y,宽高)
+question:带问号的砖块
+startPosition:玩家开始的地方(如果没有的话,程序内就按照100,100也可以)
+
+
+
+
+
+ 
+*/
+
+{"land":[{"x":0,"y":32,"width":32,"height":32}]}

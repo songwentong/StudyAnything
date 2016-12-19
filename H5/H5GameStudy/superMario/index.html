@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			/*调整画布的样式*/
+			
+			canvas {
+				border: 1px solid #d3d3d3;
+				background-color: #f1f1f1;
+			}
+		</style>
+		<script src="scripts/sprite.js"></script>
+	</head>
+
+	<body onload="main()">
+		<script>
+			var canvas;
+			var windowWidth, windowHeight;
+			var context;
+			var sprites;
+			var offSetX;
+			var offSetY;
+			var frame;
+			var groundImage;
+			var marioImage;
+			
+			//游戏状态,  0游戏前,1游戏中,2游戏结束
+			var gameState;
+			//按键状态
+			var keystate;
+			
+
+			function CGRect(x, y, width, height) {
+				this.x = x;
+				this.y = y;
+				this.width = width;
+				this.height = height;
+			};
+			//超级玛丽
+			var mario = {
+				x: 100,
+				y: 100,
+				//动画序列
+				animation: [0,1,2],
+				
+				//面对右边
+				faceToRight:true,
+				animationFrame1:0,
+				running:false,
+				width: 20,
+				height: 35,
+				xGravity:0.2,
+				//X方向的最大速度
+				xSpeed: 5,
+				//当前的X方向速度
+				speedX: 0,
+				//当前Y方向的速度
+				speedY: 0,
+				//重力加速度
+				gravity: 0.3,
+				
+				//跳跃
+				jump: function() {
+					//获得一个初始速度
+					this.speedY = -7;
+					this.gravity = 0.18;
+					console.log("跳动");
+				},
+				//检查按键状态,响应对应时间
+				checkButtonEvent: function() {
+					/*
+					 KEY_LEFT  = 37,
+					 KEY_UP    = 38,
+					 KEY_RIGHT = 39,
+					 KEY_DOWN  = 40,
+					 * */
+					//左按钮被按下
+					if (keystate[37] == true) {
+						
+						this.speedX -= this.xGravity;
+						this.speedX = Math.max(-this.xSpeed,this.speedX);
+						running = true;
+						this.faceToRight = false;
+				
+						
+					} else if (keystate[39] == true) {
+						//右按钮按下,设置速度为右边方向的最大速度
+						this.speedX += this.xGravity;
+						this.speedX = Math.min(this.xSpeed,this.speedX);
+//						this.speedX = this.xSpeed;
+						this.faceToRight = true;
+						//在跑动
+						running = true;
+						
+						
+//						animationFrame =(parseInt(frame/1)%3);
+						
+						//右侧有足够的空间,可以向右侧移动offset
+						if(offSetX+windowWidth<groundWidth){
+						
+						//人物在屏幕右端
+						if(mario.x>windowWidth * 0.5){
+							//把速度设置为0,让屏幕运动
+							this.speedX = 0;
+						}{
+							
+						}
+						}
+						
+					} else {
+						this.speedX = 0;
+						running = false;
+					}
+					if(running){
+						this.animationFrame1 += frame%10 === 0?1:0;
+						this.animationFrame1 %= this.animation.length;
+//						console.log(this.animationFrame1);
+					}
+					
+					//上按钮
+					if (keystate[38] == true) {
+						//地面
+						for (index in grounds) {
+							var rect = grounds[index];
+							//如果人和物体在X方向上没有任何接触,就不管
+							if (this.x + this.width < rect.x || this.x > rect.x + rect.width) {} else {
+								//否则
+								//在物体上方,将要穿透的时候
+								if (this.y < rect.y && this.y + this.height > rect.y) {
+									this.y = rect.y - this.height;
+									this.gravity = 0;
+								}
+							}
+						}
+						if (this.gravity == 0) {
+							this.jump();
+						}
+						//当前在平地上
+						//						if (this.y + this.height >= windowHeight) {
+						//							this.jump();
+						//						}
+					}
+					//下按钮
+					if (keystate[39] == true) {}
+				},
+				checkIsOnTheGround: function() {
+					var onGround = false;
+					for (index in grounds) {
+						var rect = grounds[index];
+						//如果人在最左边或者人在最右边,就有可能会在Y轴上接触
+						if (this.x + this.width < rect.x || this.x < rect.x + rect.width) {
+							//在物体上方,将要穿透的时候
+							if (this.y < rect.y && this.y + this.height > rect.y) {
+								this.y = rect.y - this.height;
+								onGround = true;
+							}else{
+								
+							}
+						}
+					}
+				},
+				update: function() {
+					//检查按钮状态,调整运动状态
+					this.checkButtonEvent();
+					
+					//移动到该位置
+					this.speedY += this.gravity;
+					this.y += this.speedY;
+					this.x += this.speedX;
+					if (this.x < 0) {
+						this.x = 0;
+					} else if (this.x + this.width > windowWidth) {
+						this.x = windowWidth - this.width;
+					}
+					//地面
+					for (index in grounds) {
+						var rect = grounds[index];
+						//如果人和物体在X方向上没有任何接触,就不管
+						if (this.x + this.width < rect.x || this.x > rect.x + rect.width) {} else {
+							//否则
+							//在物体上方,将要穿透的时候
+							if (this.y < rect.y && this.y + this.height > rect.y) {
+								this.y = rect.y - this.height;
+								this.gravity = 0;
+							}
+						}
+					}
+					//检查是否触底
+					if (this.y + this.height >= windowHeight) {
+						gameOver();
+					} else {}
+					
+					//如果速度大于0,或者画布在移动,执行必要的行走.
+					
+					
+				},
+				draw: function() {
+					context.save();
+					context.fillStyle = "#f00";
+
+//					context.scale(-1,1);
+					//在跳跃中
+					if(this.gravity!=0){
+						
+						jumpImage.draw(context,this.x,this.y);
+//						context.angl
+					}else{
+						
+						//跑步中
+						if(running){
+						var n = this.animationFrame1;
+						
+//						if(!this.faceToRight){
+//							context.setTransform(1,0,0,1,0,0);
+//						}
+						smallMarioRunImages[n].draw(context,this.x,this.y);
+//						smallMarioRunImages[n].draw2(context,this.x,this.y,this.faceToRight);
+//						var n = this.animation[this.frame];
+//		s_bird[n].draw(ctx, -s_bird[n].width/2, -s_bird[n].height/2);
+					}else{
+						marioImage.draw(context,this.x,this.y);
+					}
+					}
+//					context.setTransform(1,0,0,1,0,0);
+					
+//					context.fillRect(this.x, this.y, this.width, this.height);
+					context.restore();
+				}
+			};
+			//地面和障碍物
+			var ground = {
+				//地面
+				grounds: [],
+				groundWidth: 10000,
+				//初始化地面
+				initGrounds: function() {
+					grounds = new Array()
+					var gorundWidth = 32;
+					var groundHeight = 32;
+					groundWidth = 32*70;
+					for (var i = 0; i < 200; i++) {
+						var rect = new CGRect(gorundWidth * i, windowHeight - groundHeight, gorundWidth, groundHeight);
+						grounds.push(rect);
+						rect = new CGRect(gorundWidth * i, windowHeight - 2*groundHeight, gorundWidth, groundHeight);
+						grounds.push(rect);
+					}
+					
+				},
+				update: function() {
+					//可以向右移动
+					if(offSetX+windowWidth<groundWidth){
+						//人物在屏幕右端
+						if(mario.x>windowWidth * 0.5){
+							//向右的按钮按下
+							if(keystate[39] == true){
+								//设置马里奥的移动速度为X方向的速度
+								offSetX+=mario.xSpeed;
+//								mario.x-=mario.speedX;
+							}
+							
+						}
+					}
+				},
+				draw: function() {
+					for (index in grounds) {
+						var rect = grounds[index];
+						context.fillStyle = "#ff0";
+						
+						groundImage.draw(context, rect.x-offSetX, rect.y);
+						
+					}
+				}
+			};
+			
+			var backGround = {
+				update:function(){
+					
+				},
+				draw:function(){
+					
+				}
+			};
+			
+			//控制
+			var control = {};
+			//创建主方法
+			function main() {
+				//初始化马里奥运动的图片
+				initSprites();
+				
+				frame = 0;
+				offSetX = 0;
+				gameState = 1;
+				//创建一个画布
+				canvas = document.createElement("canvas");
+				//创建一个空的数组
+				sprites = [];
+				//把马里奥装进去
+				sprites.push(mario);
+				//获取画布的图形上下文,方便绘制
+				context = canvas.getContext("2d");
+				//				alert("dsada");
+				//取得屏幕的宽度
+				windowWidth = 800;
+				windowHeight = 480;
+				//设置画布的宽高
+				canvas.width = windowWidth;
+				canvas.height = windowHeight;
+				//插入canvas
+				document.body.appendChild(canvas);
+				keystate = {};
+				//按钮按下
+				document.addEventListener("keydown", function(event) {
+					//记录按键事件
+					keystate[event.keyCode] = true;
+				});
+				//按钮松开
+				document.addEventListener("keyup", function(event) {
+					//去掉按键事件
+					delete keystate[event.keyCode];
+				});
+				
+				
+				marioImage = new Image();
+				marioImage.onload = function(){
+					marioImage = new Sprite(marioImage,0,0,24,32);
+					mario.width = 24;
+					mario.height = 32;
+				}
+				marioImage.src = "res/smallMario.png";
+				
+				
+				//初始化地面或者障碍物
+				ground.initGrounds();
+				groundImage = new Image();
+				groundImage.onload = function() {
+					groundImage = new Sprite(groundImage, 0, 0, 32, 32);
+					run();
+				}
+				groundImage.src = "res/ground.png";
+			}
+
+			
+
+			function reset() {
+				//
+				offSetX = 0;
+				offSetY = 0;
+			}
+			//run方法
+			function run() {
+				//循环函数
+				var loop = function() {
+					frame++;
+//					if (frame % 3 == 0) {
+					clearCanvas();
+					update();
+					draw();
+//					}
+					window.requestAnimationFrame(loop, canvas);
+					//					console.log("dsadas");
+				}
+				window.requestAnimationFrame(loop, canvas);
+			}
+			//游戏结束
+			function gameOver() {
+				//设置游戏状态
+				gameState = 2;
+				//跳跃一下,游戏结束
+				mario.jump();
+			}
+			//清掉画布,重新绘制
+			function clearCanvas() {
+				context.clearRect(0, 0, windowWidth, windowHeight);
+			}
+			//更新model
+			function update() {
+				backGround.update();
+				ground.update();
+				mario.update();
+			}
+
+			function updateCanvas() {}
+			//绘制方法
+			function draw() {
+				backGround.draw();
+				ground.draw();
+				mario.draw();
+			}
+			//执行主方法
+			//			main();
+		</script>
+	</body>
+
+</html>
