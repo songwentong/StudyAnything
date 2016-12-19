@@ -7,13 +7,17 @@
 //
 
 #import "ViewController.h"
-
+@interface ViewController()
+{
+    NSXMLParser *xmlParser;
+}
+@end
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    // Do any additional setup after loading the view.
+    
 }
 
 
@@ -22,6 +26,7 @@
 
     // Update the view, if already loaded.
 }
+#pragma mark - NSXMLParserDelegate
 
 
 @end
