@@ -82,9 +82,9 @@
 			children = (
 				E118801A1E0BC4BC00F70986 /* Main.storyboard */,
 				E11880291E0BC51C00F70986 /* Message.storyboard */,
-				E10A8FDB1E0BC72C00A033B8 /* Launch Screen.storyboard */,
 				E10A8FDD1E0BC7C400A033B8 /* Contacts.storyboard */,
 				E10A8FDF1E0BC7D400A033B8 /* Trend.storyboard */,
+				E10A8FDB1E0BC72C00A033B8 /* Launch Screen.storyboard */,
 			);
 			name = IB;
 			sourceTree = "<group>";

@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--消息-->
         <scene sceneID="98e-o8-Bog">
             <objects>
-                <navigationController id="X9b-qT-JQS" sceneMemberID="viewController">
+                <navigationController title="消息" id="X9b-qT-JQS" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Zu7-UQ-9rB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
