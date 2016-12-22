@@ -20,6 +20,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="Mr1-8D-ISE" kind="relationship" relationship="viewControllers" id="wqZ-wN-uKC"/>
+                        <segue destination="pg8-Y4-ZdD" kind="relationship" relationship="viewControllers" id="f1a-Vf-o4u"/>
+                        <segue destination="3ss-ON-VAo" kind="relationship" relationship="viewControllers" id="XiB-G1-dxP"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IAc-u2-qJE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -35,6 +37,26 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E64-RC-d1Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1828" y="-264"/>
+        </scene>
+        <!--Contacts-->
+        <scene sceneID="TCz-Tp-grs">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Contacts" id="pg8-Y4-ZdD" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="9Cs-lY-ph8"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SM7-bc-57v" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1828" y="-225"/>
+        </scene>
+        <!--Trend-->
+        <scene sceneID="oZK-fF-zJB">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Trend" id="3ss-ON-VAo" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="ySQ-P5-fwY"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gGP-EL-Gyu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1813" y="-184"/>
         </scene>
     </scenes>
 </document>
