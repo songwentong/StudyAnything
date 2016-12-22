@@ -16,6 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        if let vc = window?.rootViewController as? UITabBarController{
+            let frame = vc.view.frame
+            vc.view.frame = CGRect(x: 100, y: frame.origin.y, width: frame.size.width, height: frame.size.height)
+            print("\(vc.viewControllers)")
+        }
         return true
     }
 
