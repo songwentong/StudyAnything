@@ -38,6 +38,7 @@ import XMLParser.*;
 /*
  XMLChecker 是一个占位符检查器,用来检查安卓开发的语言文件中的占位符的问题.
 
+
  本类有两个功能
  1.检查占位符是否合法的.
  2.检查某一种语言中的占位符是否和英文中的是一样的.(类型和数量一一进行比对) 
@@ -54,6 +55,7 @@ public class XMLChecker {
 	public XMLChecker() {
 		super();
 		checkTime = 0;
+		
 	}
 
 	public static boolean isMac(){
