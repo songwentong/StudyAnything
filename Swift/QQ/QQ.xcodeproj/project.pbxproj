@@ -15,7 +15,33 @@
 		E118801C1E0BC4BC00F70986 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E118801A1E0BC4BC00F70986 /* Main.storyboard */; };
 		E118801E1E0BC4BC00F70986 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E118801D1E0BC4BC00F70986 /* Assets.xcassets */; };
 		E118802A1E0BC51C00F70986 /* Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E11880291E0BC51C00F70986 /* Message.storyboard */; };
+		E1ED54461E14AB6B005EDF30 /* CallDirectoryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED54451E14AB6B005EDF30 /* CallDirectoryHandler.swift */; };
+		E1ED544A1E14AB6B005EDF30 /* QQCallUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E1ED54431E14AB6A005EDF30 /* QQCallUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E1ED54481E14AB6B005EDF30 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E118800B1E0BC4BC00F70986 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E1ED54421E14AB6A005EDF30;
+			remoteInfo = QQCallUI;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E1ED544E1E14AB6B005EDF30 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				E1ED544A1E14AB6B005EDF30 /* QQCallUI.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		E10A8FD91E0BC64D00A033B8 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
@@ -28,10 +54,20 @@
 		E118801D1E0BC4BC00F70986 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E11880221E0BC4BC00F70986 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E11880291E0BC51C00F70986 /* Message.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Message.storyboard; sourceTree = "<group>"; };
+		E1ED54431E14AB6A005EDF30 /* QQCallUI.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = QQCallUI.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1ED54451E14AB6B005EDF30 /* CallDirectoryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallDirectoryHandler.swift; sourceTree = "<group>"; };
+		E1ED54471E14AB6B005EDF30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		E11880101E0BC4BC00F70986 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1ED54401E14AB6A005EDF30 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -53,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				E11880151E0BC4BC00F70986 /* QQ */,
+				E1ED54441E14AB6B005EDF30 /* QQCallUI */,
 				E11880141E0BC4BC00F70986 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -61,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				E11880131E0BC4BC00F70986 /* QQ.app */,
+				E1ED54431E14AB6A005EDF30 /* QQCallUI.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -89,6 +127,15 @@
 			name = IB;
 			sourceTree = "<group>";
 		};
+		E1ED54441E14AB6B005EDF30 /* QQCallUI */ = {
+			isa = PBXGroup;
+			children = (
+				E1ED54451E14AB6B005EDF30 /* CallDirectoryHandler.swift */,
+				E1ED54471E14AB6B005EDF30 /* Info.plist */,
+			);
+			path = QQCallUI;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -99,15 +146,34 @@
 				E118800F1E0BC4BC00F70986 /* Sources */,
 				E11880101E0BC4BC00F70986 /* Frameworks */,
 				E11880111E0BC4BC00F70986 /* Resources */,
+				E1ED544E1E14AB6B005EDF30 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E1ED54491E14AB6B005EDF30 /* PBXTargetDependency */,
 			);
 			name = QQ;
 			productName = QQ;
 			productReference = E11880131E0BC4BC00F70986 /* QQ.app */;
 			productType = "com.apple.product-type.application";
+		};
+		E1ED54421E14AB6A005EDF30 /* QQCallUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E1ED544D1E14AB6B005EDF30 /* Build configuration list for PBXNativeTarget "QQCallUI" */;
+			buildPhases = (
+				E1ED543F1E14AB6A005EDF30 /* Sources */,
+				E1ED54401E14AB6A005EDF30 /* Frameworks */,
+				E1ED54411E14AB6A005EDF30 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QQCallUI;
+			productName = QQCallUI;
+			productReference = E1ED54431E14AB6A005EDF30 /* QQCallUI.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -120,6 +186,11 @@
 				ORGANIZATIONNAME = songwentong;
 				TargetAttributes = {
 					E11880121E0BC4BC00F70986 = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = QZFW9RQ778;
+						ProvisioningStyle = Automatic;
+					};
+					E1ED54421E14AB6A005EDF30 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = QZFW9RQ778;
 						ProvisioningStyle = Automatic;
@@ -140,6 +211,7 @@
 			projectRoot = "";
 			targets = (
 				E11880121E0BC4BC00F70986 /* QQ */,
+				E1ED54421E14AB6A005EDF30 /* QQCallUI */,
 			);
 		};
 /* End PBXProject section */
@@ -158,6 +230,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E1ED54411E14AB6A005EDF30 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -170,7 +249,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E1ED543F1E14AB6A005EDF30 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1ED54461E14AB6B005EDF30 /* CallDirectoryHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E1ED54491E14AB6B005EDF30 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E1ED54421E14AB6A005EDF30 /* QQCallUI */;
+			targetProxy = E1ED54481E14AB6B005EDF30 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E118801A1E0BC4BC00F70986 /* Main.storyboard */ = {
@@ -278,6 +373,7 @@
 		E11880261E0BC4BC00F70986 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = QZFW9RQ778;
 				INFOPLIST_FILE = QQ/Info.plist;
@@ -291,12 +387,41 @@
 		E11880271E0BC4BC00F70986 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = QZFW9RQ778;
 				INFOPLIST_FILE = QQ/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.songwentong.QQ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		E1ED544B1E14AB6B005EDF30 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				DEVELOPMENT_TEAM = QZFW9RQ778;
+				INFOPLIST_FILE = QQCallUI/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.songwentong.QQ.QQCallUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		E1ED544C1E14AB6B005EDF30 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				DEVELOPMENT_TEAM = QZFW9RQ778;
+				INFOPLIST_FILE = QQCallUI/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.songwentong.QQ.QQCallUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -321,6 +446,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		E1ED544D1E14AB6B005EDF30 /* Build configuration list for PBXNativeTarget "QQCallUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E1ED544B1E14AB6B005EDF30 /* Debug */,
+				E1ED544C1E14AB6B005EDF30 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
