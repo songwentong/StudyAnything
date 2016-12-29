@@ -15,17 +15,27 @@
 		E118801C1E0BC4BC00F70986 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E118801A1E0BC4BC00F70986 /* Main.storyboard */; };
 		E118801E1E0BC4BC00F70986 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E118801D1E0BC4BC00F70986 /* Assets.xcassets */; };
 		E118802A1E0BC51C00F70986 /* Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E11880291E0BC51C00F70986 /* Message.storyboard */; };
-		E1ED54461E14AB6B005EDF30 /* CallDirectoryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED54451E14AB6B005EDF30 /* CallDirectoryHandler.swift */; };
-		E1ED544A1E14AB6B005EDF30 /* QQCallUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E1ED54431E14AB6A005EDF30 /* QQCallUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E1ED54561E14AD18005EDF30 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED54551E14AD18005EDF30 /* ShareViewController.swift */; };
+		E1ED54591E14AD18005EDF30 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1ED54571E14AD18005EDF30 /* MainInterface.storyboard */; };
+		E1ED545D1E14AD18005EDF30 /* QQShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E1ED54531E14AD18005EDF30 /* QQShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E1ED54681E14AD33005EDF30 /* CallDirectoryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED54671E14AD33005EDF30 /* CallDirectoryHandler.swift */; };
+		E1ED546C1E14AD33005EDF30 /* QQCallKitExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E1ED54651E14AD33005EDF30 /* QQCallKitExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E1ED54481E14AB6B005EDF30 /* PBXContainerItemProxy */ = {
+		E1ED545B1E14AD18005EDF30 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E118800B1E0BC4BC00F70986 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = E1ED54421E14AB6A005EDF30;
-			remoteInfo = QQCallUI;
+			remoteGlobalIDString = E1ED54521E14AD18005EDF30;
+			remoteInfo = QQShareExtension;
+		};
+		E1ED546A1E14AD33005EDF30 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E118800B1E0BC4BC00F70986 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E1ED54641E14AD33005EDF30;
+			remoteInfo = QQCallKitExtension;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -36,7 +46,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				E1ED544A1E14AB6B005EDF30 /* QQCallUI.appex in Embed App Extensions */,
+				E1ED545D1E14AD18005EDF30 /* QQShareExtension.appex in Embed App Extensions */,
+				E1ED546C1E14AD33005EDF30 /* QQCallKitExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -54,9 +65,13 @@
 		E118801D1E0BC4BC00F70986 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E11880221E0BC4BC00F70986 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E11880291E0BC51C00F70986 /* Message.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Message.storyboard; sourceTree = "<group>"; };
-		E1ED54431E14AB6A005EDF30 /* QQCallUI.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = QQCallUI.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		E1ED54451E14AB6B005EDF30 /* CallDirectoryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallDirectoryHandler.swift; sourceTree = "<group>"; };
-		E1ED54471E14AB6B005EDF30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E1ED54531E14AD18005EDF30 /* QQShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = QQShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1ED54551E14AD18005EDF30 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		E1ED54581E14AD18005EDF30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		E1ED545A1E14AD18005EDF30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E1ED54651E14AD33005EDF30 /* QQCallKitExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = QQCallKitExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1ED54671E14AD33005EDF30 /* CallDirectoryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallDirectoryHandler.swift; sourceTree = "<group>"; };
+		E1ED54691E14AD33005EDF30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,7 +82,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E1ED54401E14AB6A005EDF30 /* Frameworks */ = {
+		E1ED54501E14AD18005EDF30 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1ED54621E14AD33005EDF30 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -89,7 +111,8 @@
 			isa = PBXGroup;
 			children = (
 				E11880151E0BC4BC00F70986 /* QQ */,
-				E1ED54441E14AB6B005EDF30 /* QQCallUI */,
+				E1ED54541E14AD18005EDF30 /* QQShareExtension */,
+				E1ED54661E14AD33005EDF30 /* QQCallKitExtension */,
 				E11880141E0BC4BC00F70986 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -98,7 +121,8 @@
 			isa = PBXGroup;
 			children = (
 				E11880131E0BC4BC00F70986 /* QQ.app */,
-				E1ED54431E14AB6A005EDF30 /* QQCallUI.appex */,
+				E1ED54531E14AD18005EDF30 /* QQShareExtension.appex */,
+				E1ED54651E14AD33005EDF30 /* QQCallKitExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -127,13 +151,23 @@
 			name = IB;
 			sourceTree = "<group>";
 		};
-		E1ED54441E14AB6B005EDF30 /* QQCallUI */ = {
+		E1ED54541E14AD18005EDF30 /* QQShareExtension */ = {
 			isa = PBXGroup;
 			children = (
-				E1ED54451E14AB6B005EDF30 /* CallDirectoryHandler.swift */,
-				E1ED54471E14AB6B005EDF30 /* Info.plist */,
+				E1ED54551E14AD18005EDF30 /* ShareViewController.swift */,
+				E1ED54571E14AD18005EDF30 /* MainInterface.storyboard */,
+				E1ED545A1E14AD18005EDF30 /* Info.plist */,
 			);
-			path = QQCallUI;
+			path = QQShareExtension;
+			sourceTree = "<group>";
+		};
+		E1ED54661E14AD33005EDF30 /* QQCallKitExtension */ = {
+			isa = PBXGroup;
+			children = (
+				E1ED54671E14AD33005EDF30 /* CallDirectoryHandler.swift */,
+				E1ED54691E14AD33005EDF30 /* Info.plist */,
+			);
+			path = QQCallKitExtension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,28 +185,46 @@
 			buildRules = (
 			);
 			dependencies = (
-				E1ED54491E14AB6B005EDF30 /* PBXTargetDependency */,
+				E1ED545C1E14AD18005EDF30 /* PBXTargetDependency */,
+				E1ED546B1E14AD33005EDF30 /* PBXTargetDependency */,
 			);
 			name = QQ;
 			productName = QQ;
 			productReference = E11880131E0BC4BC00F70986 /* QQ.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E1ED54421E14AB6A005EDF30 /* QQCallUI */ = {
+		E1ED54521E14AD18005EDF30 /* QQShareExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E1ED544D1E14AB6B005EDF30 /* Build configuration list for PBXNativeTarget "QQCallUI" */;
+			buildConfigurationList = E1ED545E1E14AD18005EDF30 /* Build configuration list for PBXNativeTarget "QQShareExtension" */;
 			buildPhases = (
-				E1ED543F1E14AB6A005EDF30 /* Sources */,
-				E1ED54401E14AB6A005EDF30 /* Frameworks */,
-				E1ED54411E14AB6A005EDF30 /* Resources */,
+				E1ED544F1E14AD18005EDF30 /* Sources */,
+				E1ED54501E14AD18005EDF30 /* Frameworks */,
+				E1ED54511E14AD18005EDF30 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = QQCallUI;
-			productName = QQCallUI;
-			productReference = E1ED54431E14AB6A005EDF30 /* QQCallUI.appex */;
+			name = QQShareExtension;
+			productName = QQShareExtension;
+			productReference = E1ED54531E14AD18005EDF30 /* QQShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		E1ED54641E14AD33005EDF30 /* QQCallKitExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E1ED546D1E14AD33005EDF30 /* Build configuration list for PBXNativeTarget "QQCallKitExtension" */;
+			buildPhases = (
+				E1ED54611E14AD33005EDF30 /* Sources */,
+				E1ED54621E14AD33005EDF30 /* Frameworks */,
+				E1ED54631E14AD33005EDF30 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QQCallKitExtension;
+			productName = QQCallKitExtension;
+			productReference = E1ED54651E14AD33005EDF30 /* QQCallKitExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -190,7 +242,12 @@
 						DevelopmentTeam = QZFW9RQ778;
 						ProvisioningStyle = Automatic;
 					};
-					E1ED54421E14AB6A005EDF30 = {
+					E1ED54521E14AD18005EDF30 = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = QZFW9RQ778;
+						ProvisioningStyle = Automatic;
+					};
+					E1ED54641E14AD33005EDF30 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = QZFW9RQ778;
 						ProvisioningStyle = Automatic;
@@ -211,7 +268,8 @@
 			projectRoot = "";
 			targets = (
 				E11880121E0BC4BC00F70986 /* QQ */,
-				E1ED54421E14AB6A005EDF30 /* QQCallUI */,
+				E1ED54521E14AD18005EDF30 /* QQShareExtension */,
+				E1ED54641E14AD33005EDF30 /* QQCallKitExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -230,7 +288,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E1ED54411E14AB6A005EDF30 /* Resources */ = {
+		E1ED54511E14AD18005EDF30 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1ED54591E14AD18005EDF30 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1ED54631E14AD33005EDF30 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -249,21 +315,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E1ED543F1E14AB6A005EDF30 /* Sources */ = {
+		E1ED544F1E14AD18005EDF30 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1ED54461E14AB6B005EDF30 /* CallDirectoryHandler.swift in Sources */,
+				E1ED54561E14AD18005EDF30 /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1ED54611E14AD33005EDF30 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1ED54681E14AD33005EDF30 /* CallDirectoryHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E1ED54491E14AB6B005EDF30 /* PBXTargetDependency */ = {
+		E1ED545C1E14AD18005EDF30 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E1ED54421E14AB6A005EDF30 /* QQCallUI */;
-			targetProxy = E1ED54481E14AB6B005EDF30 /* PBXContainerItemProxy */;
+			target = E1ED54521E14AD18005EDF30 /* QQShareExtension */;
+			targetProxy = E1ED545B1E14AD18005EDF30 /* PBXContainerItemProxy */;
+		};
+		E1ED546B1E14AD33005EDF30 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E1ED54641E14AD33005EDF30 /* QQCallKitExtension */;
+			targetProxy = E1ED546A1E14AD33005EDF30 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -274,6 +353,14 @@
 				E118801B1E0BC4BC00F70986 /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E1ED54571E14AD18005EDF30 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E1ED54581E14AD18005EDF30 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -398,28 +485,54 @@
 			};
 			name = Release;
 		};
-		E1ED544B1E14AB6B005EDF30 /* Debug */ = {
+		E1ED545F1E14AD18005EDF30 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				DEVELOPMENT_TEAM = QZFW9RQ778;
-				INFOPLIST_FILE = QQCallUI/Info.plist;
+				INFOPLIST_FILE = QQShareExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.songwentong.QQ.QQCallUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.songwentong.QQ.QQShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
-		E1ED544C1E14AB6B005EDF30 /* Release */ = {
+		E1ED54601E14AD18005EDF30 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = QZFW9RQ778;
+				INFOPLIST_FILE = QQShareExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.songwentong.QQ.QQShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		E1ED546E1E14AD33005EDF30 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				DEVELOPMENT_TEAM = QZFW9RQ778;
-				INFOPLIST_FILE = QQCallUI/Info.plist;
+				INFOPLIST_FILE = QQCallKitExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.songwentong.QQ.QQCallUI;
+				PRODUCT_BUNDLE_IDENTIFIER = com.songwentong.QQ.QQCallKitExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		E1ED546F1E14AD33005EDF30 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				DEVELOPMENT_TEAM = QZFW9RQ778;
+				INFOPLIST_FILE = QQCallKitExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.songwentong.QQ.QQCallKitExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -447,11 +560,19 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E1ED544D1E14AB6B005EDF30 /* Build configuration list for PBXNativeTarget "QQCallUI" */ = {
+		E1ED545E1E14AD18005EDF30 /* Build configuration list for PBXNativeTarget "QQShareExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E1ED544B1E14AB6B005EDF30 /* Debug */,
-				E1ED544C1E14AB6B005EDF30 /* Release */,
+				E1ED545F1E14AD18005EDF30 /* Debug */,
+				E1ED54601E14AD18005EDF30 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		E1ED546D1E14AD33005EDF30 /* Build configuration list for PBXNativeTarget "QQCallKitExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E1ED546E1E14AD33005EDF30 /* Debug */,
+				E1ED546F1E14AD33005EDF30 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

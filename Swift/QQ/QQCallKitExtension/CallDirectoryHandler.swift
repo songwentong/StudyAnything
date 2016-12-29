@@ -1,6 +1,6 @@
 //
 //  CallDirectoryHandler.swift
-//  QQCallUI
+//  QQCallKitExtension
 //
 //  Created by SongWentong on 29/12/2016.
 //  Copyright © 2016 songwentong. All rights reserved.
