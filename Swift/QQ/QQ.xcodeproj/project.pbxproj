@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E10A8FDA1E0BC64D00A033B8 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10A8FD91E0BC64D00A033B8 /* MessageViewController.swift */; };
 		E10A8FDC1E0BC72C00A033B8 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E10A8FDB1E0BC72C00A033B8 /* Launch Screen.storyboard */; };
 		E10A8FDE1E0BC7C400A033B8 /* Contacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E10A8FDD1E0BC7C400A033B8 /* Contacts.storyboard */; };
 		E10A8FE01E0BC7D400A033B8 /* Trend.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E10A8FDF1E0BC7D400A033B8 /* Trend.storyboard */; };
@@ -15,6 +14,7 @@
 		E118801C1E0BC4BC00F70986 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E118801A1E0BC4BC00F70986 /* Main.storyboard */; };
 		E118801E1E0BC4BC00F70986 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E118801D1E0BC4BC00F70986 /* Assets.xcassets */; };
 		E118802A1E0BC51C00F70986 /* Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E11880291E0BC51C00F70986 /* Message.storyboard */; };
+		E1C439941E14E2E300FC6AAD /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C439931E14E2E300FC6AAD /* MessageViewController.swift */; };
 		E1ED54561E14AD18005EDF30 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED54551E14AD18005EDF30 /* ShareViewController.swift */; };
 		E1ED54591E14AD18005EDF30 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1ED54571E14AD18005EDF30 /* MainInterface.storyboard */; };
 		E1ED545D1E14AD18005EDF30 /* QQShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E1ED54531E14AD18005EDF30 /* QQShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -55,7 +55,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		E10A8FD91E0BC64D00A033B8 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		E10A8FDB1E0BC72C00A033B8 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		E10A8FDD1E0BC7C400A033B8 /* Contacts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Contacts.storyboard; sourceTree = "<group>"; };
 		E10A8FDF1E0BC7D400A033B8 /* Trend.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Trend.storyboard; sourceTree = "<group>"; };
@@ -65,6 +64,7 @@
 		E118801D1E0BC4BC00F70986 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E11880221E0BC4BC00F70986 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E11880291E0BC51C00F70986 /* Message.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Message.storyboard; sourceTree = "<group>"; };
+		E1C439931E14E2E300FC6AAD /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		E1ED54531E14AD18005EDF30 /* QQShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = QQShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1ED54551E14AD18005EDF30 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		E1ED54581E14AD18005EDF30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
@@ -99,14 +99,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E10A8FD81E0BC63700A033B8 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				E10A8FD91E0BC64D00A033B8 /* MessageViewController.swift */,
-			);
-			name = Classes;
-			sourceTree = "<group>";
-		};
 		E118800A1E0BC4BC00F70986 = {
 			isa = PBXGroup;
 			children = (
@@ -130,7 +122,8 @@
 		E11880151E0BC4BC00F70986 /* QQ */ = {
 			isa = PBXGroup;
 			children = (
-				E10A8FD81E0BC63700A033B8 /* Classes */,
+				E1C439921E14E2CD00FC6AAD /* Classes */,
+				E1C439911E14E2C700FC6AAD /* Resources */,
 				E11880281E0BC50900F70986 /* IB */,
 				E11880161E0BC4BC00F70986 /* AppDelegate.swift */,
 				E118801D1E0BC4BC00F70986 /* Assets.xcassets */,
@@ -149,6 +142,21 @@
 				E10A8FDB1E0BC72C00A033B8 /* Launch Screen.storyboard */,
 			);
 			name = IB;
+			sourceTree = "<group>";
+		};
+		E1C439911E14E2C700FC6AAD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E1C439921E14E2CD00FC6AAD /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				E1C439931E14E2E300FC6AAD /* MessageViewController.swift */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		E1ED54541E14AD18005EDF30 /* QQShareExtension */ = {
@@ -310,7 +318,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E10A8FDA1E0BC64D00A033B8 /* MessageViewController.swift in Sources */,
+				E1C439941E14E2E300FC6AAD /* MessageViewController.swift in Sources */,
 				E11880171E0BC4BC00F70986 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -567,6 +575,7 @@
 				E1ED54601E14AD18005EDF30 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E1ED546D1E14AD33005EDF30 /* Build configuration list for PBXNativeTarget "QQCallKitExtension" */ = {
 			isa = XCConfigurationList;
@@ -575,6 +584,7 @@
 				E1ED546F1E14AD33005EDF30 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
