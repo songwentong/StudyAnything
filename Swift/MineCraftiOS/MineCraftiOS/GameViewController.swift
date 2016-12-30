@@ -9,11 +9,15 @@
 import UIKit
 import QuartzCore
 import SceneKit
-
+/*
+ 下一步,建立四面的墙壁
+ 
+ */
 class GameViewController: UIViewController {
 
     @IBOutlet var scnView: WTGameView!
     var cameraNode:SCNNode?
+    var blockNode:SCNNode?
     var label:UILabel?
     var tapGesture:UITapGestureRecognizer?
     public func readJSON()->Void{
@@ -27,9 +31,8 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         setupScene()
-        let block = addBlock(with: "WoodCubeA", at: SCNVector3Make(10, 10, 100))
-        block?.addChildNode(cameraNode!)
-        scnView.pointOfView = cameraNode
+        blockNode = addBlock(with: "WoodCubeA", at: SCNVector3Make(10, 10, 100))
+        
         setUpCameraTimer()
     }
     func setUpCameraTimer(){
@@ -44,7 +47,7 @@ class GameViewController: UIViewController {
 //        cameraNode?.eulerAngles
         if let scnView:SCNView = self.view as! SCNView? {
             label?.text = "camera: \(scnView.pointOfView?.eulerAngles)"
-            print("camera: \(scnView.pointOfView?.eulerAngles)")
+//            print("camera: \(scnView.pointOfView?.eulerAngles)")
         }
 
     }
@@ -61,12 +64,12 @@ class GameViewController: UIViewController {
         cameraNode.position = SCNVector3Make(0, 0, 0);
         cameraNode.eulerAngles = SCNVector3Make(3, 0.6, 3)
 //        cameraNode.rotation  = SCNVector4Make(1, 1, 1, Float(-M_PI*0.75));
-//        scene.rootNode.addChildNode(cameraNode)
+        scene.rootNode.addChildNode(cameraNode)
         
         // place the camera
         self.cameraNode = cameraNode
-//        self.scnView.pointOfView = cameraNode
-        
+        self.scnView.pointOfView = cameraNode
+        self.scnView.delegate = self;
         
         // create and add a light to the scene
         let lightNode = SCNNode()
@@ -192,4 +195,13 @@ class GameViewController: UIViewController {
         // Release any cached data, images, etc that aren't in use.
     }
 
+}
+extension GameViewController:SCNSceneRendererDelegate{
+    public func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval){
+        if let block = blockNode {
+            cameraNode?.position = block.position
+        }
+        
+        print("per frame")
+    }
 }
