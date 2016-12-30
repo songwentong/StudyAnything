@@ -13,6 +13,7 @@ import SceneKit
 class GameViewController: UIViewController {
 
     var cameraNode:SCNNode?
+    var label:UILabel?
     public func readJSON()->Void{
     
     }
@@ -25,6 +26,18 @@ class GameViewController: UIViewController {
         
         setupScene()
         addBlock(with: "WoodCubeA.jpg", at: SCNVector3Make(10, 10, 10))
+        setUpCameraTimer()
+    }
+    func setUpCameraTimer(){
+        label = UILabel()
+        label?.frame = CGRect(x: 0, y: 0, width: 1000, height: 25)
+        label?.textColor = UIColor.red
+        label?.text = "camera"
+        self.view.addSubview(label!)
+         _ = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(GameViewController.timerMethod(timer:)), userInfo: nil, repeats: true)
+    }
+    func timerMethod(timer:Timer){
+        label?.text = "camera: \(cameraNode?.camera?.projectionTransform)"
     }
     func setupScene(){
         // create a new scene
