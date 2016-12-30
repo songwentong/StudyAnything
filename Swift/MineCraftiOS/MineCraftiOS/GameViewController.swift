@@ -23,10 +23,10 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let scene = setupScene()
-        addBlock(to: scene, with: "WoodCubeA.jpg", at: SCNVector3Make(10, 10, 10))
+        setupScene()
+        addBlock(with: "WoodCubeA.jpg", at: SCNVector3Make(10, 10, 10))
     }
-    func setupScene()->SCNScene{
+    func setupScene(){
         // create a new scene
         let scene = SCNScene()
         
@@ -77,7 +77,6 @@ class GameViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
         setupGround()
-        return scene
     }
     func setupGround(){
         //floor
@@ -92,14 +91,19 @@ class GameViewController: UIViewController {
             view.scene?.rootNode.addChildNode(floor)
         }
     }
-    func addBlock(to scene:SCNScene,with imageName:String,at position:SCNVector3){
-        let block = SCNNode()
-        block.position = position
-        block.geometry = SCNBox.init(width: 5, height: 5, length: 5, chamferRadius: 0)
-        block.geometry?.firstMaterial?.diffuse.contents = imageName
-        block.geometry?.firstMaterial?.diffuse.mipFilter = .linear
-        block.physicsBody = SCNPhysicsBody.dynamic()
-        scene.rootNode.addChildNode(block)
+    func addBlock(with imageName:String,at position:SCNVector3){
+        if let view:SCNView = self.view as! SCNView? {
+            if let scene:SCNScene = view.scene {
+                let block = SCNNode()
+                block.position = position
+                block.geometry = SCNBox.init(width: 5, height: 5, length: 5, chamferRadius: 0)
+                block.geometry?.firstMaterial?.diffuse.contents = imageName
+                block.geometry?.firstMaterial?.diffuse.mipFilter = .linear
+                block.physicsBody = SCNPhysicsBody.dynamic()
+                scene.rootNode.addChildNode(block)
+            }
+        }
+        
     }
     func handleTap(_ gestureRecognize: UIGestureRecognizer) {
         // retrieve the SCNView
