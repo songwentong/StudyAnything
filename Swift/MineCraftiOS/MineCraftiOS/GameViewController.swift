@@ -12,6 +12,14 @@ import SceneKit
 
 class GameViewController: UIViewController {
 
+    
+    public func readJSON()->Void{
+    
+    }
+    public func writeJSON()->Void{
+    
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,10 +49,10 @@ class GameViewController: UIViewController {
         scene.rootNode.addChildNode(ambientLightNode)
         
         // retrieve the ship node
-        let ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
+//        let ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
         
         // animate the 3d object
-        ship.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 2, z: 0, duration: 1)))
+//        ship.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 2, z: 0, duration: 1)))
         
         // retrieve the SCNView
         let scnView = self.view as! SCNView
@@ -64,8 +72,21 @@ class GameViewController: UIViewController {
         // add a tap gesture recognizer
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
+        setupGround();
     }
-    
+    func setupGround(){
+        //floor
+        let floor = SCNNode()
+        floor.geometry = SCNFloor()
+        floor.geometry?.firstMaterial?.diffuse.contents = "wood.png"
+        floor.geometry?.firstMaterial?.diffuse.contentsTransform = SCNMatrix4MakeScale(2, 2, 1)
+        floor.geometry?.firstMaterial?.locksAmbientWithDiffuse = true
+        let body = SCNPhysicsBody.static()
+        floor.physicsBody = body
+        if let view:SCNView = self.view as! SCNView? {
+            view.scene?.rootNode.addChildNode(floor)
+        }
+    }
     func handleTap(_ gestureRecognize: UIGestureRecognizer) {
         // retrieve the SCNView
         let scnView = self.view as! SCNView

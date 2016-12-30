@@ -13,6 +13,7 @@
 		E1B5667A1E16101200BBB124 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1B566781E16101200BBB124 /* Main.storyboard */; };
 		E1B5667C1E16101200BBB124 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1B5667B1E16101200BBB124 /* Assets.xcassets */; };
 		E1B5667F1E16101200BBB124 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1B5667D1E16101200BBB124 /* LaunchScreen.storyboard */; };
+		E1B5668A1E161B3F00BBB124 /* wood.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B566891E161B3F00BBB124 /* wood.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		E1B5667B1E16101200BBB124 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E1B5667E1E16101200BBB124 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E1B566801E16101200BBB124 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E1B566891E161B3F00BBB124 /* wood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wood.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		E1B566711E16101200BBB124 /* MineCraftiOS */ = {
 			isa = PBXGroup;
 			children = (
+				E1B566881E161B3F00BBB124 /* Resources */,
 				E1B566721E16101200BBB124 /* AppDelegate.swift */,
 				E1B566741E16101200BBB124 /* art.scnassets */,
 				E1B566761E16101200BBB124 /* GameViewController.swift */,
@@ -65,6 +68,14 @@
 				E1B566801E16101200BBB124 /* Info.plist */,
 			);
 			path = MineCraftiOS;
+			sourceTree = "<group>";
+		};
+		E1B566881E161B3F00BBB124 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E1B566891E161B3F00BBB124 /* wood.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -128,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1B566751E16101200BBB124 /* art.scnassets in Resources */,
+				E1B5668A1E161B3F00BBB124 /* wood.png in Resources */,
 				E1B5667F1E16101200BBB124 /* LaunchScreen.storyboard in Resources */,
 				E1B5667C1E16101200BBB124 /* Assets.xcassets in Resources */,
 				E1B5667A1E16101200BBB124 /* Main.storyboard in Resources */,
