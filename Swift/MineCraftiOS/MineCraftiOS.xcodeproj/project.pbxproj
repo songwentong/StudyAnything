@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E1A3B5151E162673008F39CB /* WoodCubeA.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E1A3B5141E162673008F39CB /* WoodCubeA.jpg */; };
 		E1B566731E16101200BBB124 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B566721E16101200BBB124 /* AppDelegate.swift */; };
 		E1B566751E16101200BBB124 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = E1B566741E16101200BBB124 /* art.scnassets */; };
 		E1B566771E16101200BBB124 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B566761E16101200BBB124 /* GameViewController.swift */; };
@@ -17,14 +18,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E1A3B5141E162673008F39CB /* WoodCubeA.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WoodCubeA.jpg; sourceTree = "<group>"; };
 		E1B5666F1E16101200BBB124 /* MineCraftiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MineCraftiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E1B566721E16101200BBB124 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E1B566741E16101200BBB124 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		E1B566761E16101200BBB124 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		E1B566721E16101200BBB124 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../AppDelegate.swift; sourceTree = "<group>"; };
+		E1B566741E16101200BBB124 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; name = art.scnassets; path = ../art.scnassets; sourceTree = "<group>"; };
+		E1B566761E16101200BBB124 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameViewController.swift; path = ../GameViewController.swift; sourceTree = "<group>"; };
 		E1B566791E16101200BBB124 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		E1B5667B1E16101200BBB124 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E1B5667B1E16101200BBB124 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
 		E1B5667E1E16101200BBB124 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		E1B566801E16101200BBB124 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E1B566801E16101200BBB124 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		E1B566891E161B3F00BBB124 /* wood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wood.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -58,14 +60,8 @@
 		E1B566711E16101200BBB124 /* MineCraftiOS */ = {
 			isa = PBXGroup;
 			children = (
+				E1B5668B1E161E0E00BBB124 /* Classes */,
 				E1B566881E161B3F00BBB124 /* Resources */,
-				E1B566721E16101200BBB124 /* AppDelegate.swift */,
-				E1B566741E16101200BBB124 /* art.scnassets */,
-				E1B566761E16101200BBB124 /* GameViewController.swift */,
-				E1B566781E16101200BBB124 /* Main.storyboard */,
-				E1B5667B1E16101200BBB124 /* Assets.xcassets */,
-				E1B5667D1E16101200BBB124 /* LaunchScreen.storyboard */,
-				E1B566801E16101200BBB124 /* Info.plist */,
 			);
 			path = MineCraftiOS;
 			sourceTree = "<group>";
@@ -73,9 +69,24 @@
 		E1B566881E161B3F00BBB124 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E1A3B5141E162673008F39CB /* WoodCubeA.jpg */,
+				E1B566801E16101200BBB124 /* Info.plist */,
+				E1B5667D1E16101200BBB124 /* LaunchScreen.storyboard */,
+				E1B566781E16101200BBB124 /* Main.storyboard */,
+				E1B5667B1E16101200BBB124 /* Assets.xcassets */,
+				E1B566741E16101200BBB124 /* art.scnassets */,
 				E1B566891E161B3F00BBB124 /* wood.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		E1B5668B1E161E0E00BBB124 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				E1B566721E16101200BBB124 /* AppDelegate.swift */,
+				E1B566761E16101200BBB124 /* GameViewController.swift */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1B566751E16101200BBB124 /* art.scnassets in Resources */,
+				E1A3B5151E162673008F39CB /* WoodCubeA.jpg in Resources */,
 				E1B5668A1E161B3F00BBB124 /* wood.png in Resources */,
 				E1B5667F1E16101200BBB124 /* LaunchScreen.storyboard in Resources */,
 				E1B5667C1E16101200BBB124 /* Assets.xcassets in Resources */,
@@ -167,6 +179,7 @@
 				E1B566791E16101200BBB124 /* Base */,
 			);
 			name = Main.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		E1B5667D1E16101200BBB124 /* LaunchScreen.storyboard */ = {
@@ -175,6 +188,7 @@
 				E1B5667E1E16101200BBB124 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -275,8 +289,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = QZFW9RQ778;
 				INFOPLIST_FILE = MineCraftiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.songwentong.MineCraftiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -290,6 +306,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = QZFW9RQ778;
 				INFOPLIST_FILE = MineCraftiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.songwentong.MineCraftiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -316,6 +333,7 @@
 				E1B566851E16101200BBB124 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

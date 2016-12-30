@@ -24,7 +24,7 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         // create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        let scene = SCNScene()
         
         // create and add a camera to the scene
         let cameraNode = SCNNode()
@@ -73,6 +73,7 @@ class GameViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
         setupGround();
+        addBlock(to: scene, with: "WoodCubeA.jpg", at: SCNVector3Make(10, 10, 10))
     }
     func setupGround(){
         //floor
@@ -86,6 +87,15 @@ class GameViewController: UIViewController {
         if let view:SCNView = self.view as! SCNView? {
             view.scene?.rootNode.addChildNode(floor)
         }
+    }
+    func addBlock(to scene:SCNScene,with imageName:String,at position:SCNVector3){
+        let block = SCNNode()
+        block.position = position
+        block.geometry = SCNBox.init(width: 5, height: 5, length: 5, chamferRadius: 0)
+        block.geometry?.firstMaterial?.diffuse.contents = imageName
+        block.geometry?.firstMaterial?.diffuse.mipFilter = .linear
+        block.physicsBody = SCNPhysicsBody.dynamic()
+        scene.rootNode.addChildNode(block)
     }
     func handleTap(_ gestureRecognize: UIGestureRecognizer) {
         // retrieve the SCNView
