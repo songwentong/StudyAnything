@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E1A3B5151E162673008F39CB /* WoodCubeA.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E1A3B5141E162673008F39CB /* WoodCubeA.jpg */; };
 		E1A3B5171E166297008F39CB /* WTGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A3B5161E166297008F39CB /* WTGameView.swift */; };
+		E1A830791E1B4283001BF3C2 /* wall.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E1A830781E1B4283001BF3C2 /* wall.jpg */; };
 		E1B566731E16101200BBB124 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B566721E16101200BBB124 /* AppDelegate.swift */; };
 		E1B566751E16101200BBB124 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = E1B566741E16101200BBB124 /* art.scnassets */; };
 		E1B566771E16101200BBB124 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B566761E16101200BBB124 /* GameViewController.swift */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		E1A3B5141E162673008F39CB /* WoodCubeA.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WoodCubeA.jpg; sourceTree = "<group>"; };
 		E1A3B5161E166297008F39CB /* WTGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTGameView.swift; sourceTree = "<group>"; };
+		E1A830781E1B4283001BF3C2 /* wall.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wall.jpg; sourceTree = "<group>"; };
 		E1B5666F1E16101200BBB124 /* MineCraftiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MineCraftiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1B566721E16101200BBB124 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../AppDelegate.swift; sourceTree = "<group>"; };
 		E1B566741E16101200BBB124 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; name = art.scnassets; path = ../art.scnassets; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				E1B5667B1E16101200BBB124 /* Assets.xcassets */,
 				E1B566741E16101200BBB124 /* art.scnassets */,
 				E1B566891E161B3F00BBB124 /* wood.png */,
+				E1A830781E1B4283001BF3C2 /* wall.jpg */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 				E1B5667F1E16101200BBB124 /* LaunchScreen.storyboard in Resources */,
 				E1B5667C1E16101200BBB124 /* Assets.xcassets in Resources */,
 				E1B5667A1E16101200BBB124 /* Main.storyboard in Resources */,
+				E1A830791E1B4283001BF3C2 /* wall.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

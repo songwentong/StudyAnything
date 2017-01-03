@@ -20,6 +20,7 @@ class GameViewController: UIViewController {
     var blockNode:SCNNode?
     var label:UILabel?
     var tapGesture:UITapGestureRecognizer?
+    var panGesture:UIPanGestureRecognizer?
     public func readJSON()->Void{
     
     }
@@ -32,25 +33,52 @@ class GameViewController: UIViewController {
         
         setupScene()
         blockNode = addBlock(with: "WoodCubeA", at: SCNVector3Make(10, 10, 100))
-        
-        setUpCameraTimer()
+//        addGestures()
+    }
+    func addGestures(){
+        panGesture?.delegate = self
+        panGesture = UIPanGestureRecognizer.init(target: self, action: #selector(GameViewController.didrecieveGesture(_:)))
+        self.view.addGestureRecognizer(panGesture!)
     }
     func setUpCameraTimer(){
-        label = UILabel()
-        label?.frame = CGRect(x: 0, y: 0, width: 1000, height: 25)
-        label?.textColor = UIColor.red
-        label?.text = "camera"
-        self.view.addSubview(label!)
-         _ = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(GameViewController.timerMethod(timer:)), userInfo: nil, repeats: true)
-    }
-    func timerMethod(timer:Timer){
-//        cameraNode?.eulerAngles
-        if let scnView:SCNView = self.view as! SCNView? {
-            label?.text = "camera: \(scnView.pointOfView?.eulerAngles)"
-//            print("camera: \(scnView.pointOfView?.eulerAngles)")
-        }
 
+//         _ = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(GameViewController.timerMethod(timer:)), userInfo: nil, repeats: true)
     }
+    
+    //添加四面的墙壁
+    func addWalls(scene:SCNScene){
+        let box = SCNBox.init(width: 400, height: 100, length: 4, chamferRadius: 0)
+        box.firstMaterial?.diffuse.contents = "wall.jpg"
+        box.firstMaterial?.diffuse.contentsTransform = SCNMatrix4Mult(SCNMatrix4MakeScale(24, 2, 1), SCNMatrix4MakeTranslation(0, 1, 0));
+        box.firstMaterial?.diffuse.wrapS = .repeat
+        box.firstMaterial?.diffuse.wrapT = .mirror
+        box.firstMaterial?.isDoubleSided = false
+        
+        var wall = SCNNode.init(geometry: box)
+        wall.position = SCNVector3Make(0, 50, -92)
+        wall.physicsBody = SCNPhysicsBody.static()
+        wall.castsShadow = false
+        scene.rootNode.addChildNode(wall);
+        
+        
+        wall = wall.clone()
+        wall.position = SCNVector3Make(-202, 50, 0)
+        wall.physicsBody = SCNPhysicsBody.static()
+        wall.rotation = SCNVector4Make(0, 1, 0, Float(M_PI_2))
+        scene.rootNode.addChildNode(wall);
+        wall = wall.clone()
+        wall.position = SCNVector3Make(202, 50, 0);
+        wall.rotation = SCNVector4Make(0, 1, 0, Float(-M_PI_2))
+        wall.physicsBody = SCNPhysicsBody.static()
+        scene.rootNode.addChildNode(wall);
+        wall = wall.clone()
+        wall.position = SCNVector3Make(0, 50, 200)
+        wall.rotation = SCNVector4Make(0, 1, 0, Float(M_PI))
+        wall.physicsBody = SCNPhysicsBody.static()
+        scene.rootNode.addChildNode(wall);
+    }
+    
+    //创建环境
     func setupScene(){
         
 //        self.scnView.pointOfView = SCNNode()
@@ -61,8 +89,8 @@ class GameViewController: UIViewController {
         let cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
         cameraNode.camera?.zFar = 500;
-        cameraNode.position = SCNVector3Make(0, 0, 0);
-        cameraNode.eulerAngles = SCNVector3Make(3, 0.6, 3)
+        cameraNode.position = SCNVector3Make(10, 10, 20);
+//        cameraNode.eulerAngles = SCNVector3Make(3, 0.6, 3)
 //        cameraNode.rotation  = SCNVector4Make(1, 1, 1, Float(-M_PI*0.75));
         scene.rootNode.addChildNode(cameraNode)
         
@@ -110,13 +138,21 @@ class GameViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
         setupGround()
+        label = UILabel()
+        label?.frame = CGRect(x: 0, y: 0, width: 1000, height: 25)
+        label?.textColor = UIColor.red
+        label?.text = "camera"
+        self.view.addSubview(label!)
+        addWalls(scene: scene)
     }
+    
+    //建个地板
     func setupGround(){
         //floor
         let floor = SCNNode()
         floor.geometry = SCNFloor()
         floor.geometry?.firstMaterial?.diffuse.contents = "wood.png"
-//        floor.geometry?.firstMaterial?.diffuse.contentsTransform = SCNMatrix4MakeScale(2, 2, 1)
+        floor.geometry?.firstMaterial?.diffuse.contentsTransform = SCNMatrix4MakeScale(2, 2, 1)
         floor.geometry?.firstMaterial?.locksAmbientWithDiffuse = true
         let body = SCNPhysicsBody.static()
         floor.physicsBody = body
@@ -196,12 +232,25 @@ class GameViewController: UIViewController {
     }
 
 }
+extension GameViewController:UIGestureRecognizerDelegate{
+    func didrecieveGesture(_ geture:UIGestureRecognizer){
+        if tapGesture == geture {
+            
+        }else if panGesture == panGesture {
+            
+        }
+    }
+}
 extension GameViewController:SCNSceneRendererDelegate{
     public func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval){
         if let block = blockNode {
-            cameraNode?.position = block.position
+//            cameraNode?.position = block.position
+        }
+        if let scnView:SCNView = self.view as! SCNView? {
+//            label?.text = "camera: \(scnView.pointOfView?.eulerAngles)"
+            //            print("camera: \(scnView.pointOfView?.eulerAngles)")
         }
         
-        print("per frame")
+        
     }
 }
