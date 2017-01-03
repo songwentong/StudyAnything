@@ -74,13 +74,13 @@
 			isa = PBXGroup;
 			children = (
 				E1B5667D1E16101200BBB124 /* LaunchScreen.storyboard */,
-				E1A3B5141E162673008F39CB /* WoodCubeA.jpg */,
 				E1B566801E16101200BBB124 /* Info.plist */,
 				E1B566781E16101200BBB124 /* Main.storyboard */,
 				E1B5667B1E16101200BBB124 /* Assets.xcassets */,
 				E1B566741E16101200BBB124 /* art.scnassets */,
 				E1B566891E161B3F00BBB124 /* wood.png */,
 				E1A830781E1B4283001BF3C2 /* wall.jpg */,
+				E1A3B5141E162673008F39CB /* WoodCubeA.jpg */,
 			);
 			path = Resources;
 			sourceTree = "<group>";

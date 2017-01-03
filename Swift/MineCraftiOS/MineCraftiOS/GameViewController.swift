@@ -32,7 +32,7 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         setupScene()
-        blockNode = addBlock(with: "WoodCubeA", at: SCNVector3Make(10, 10, 100))
+        blockNode = addBlock(with: "WoodCubeA.jpg", at: SCNVector3Make(10, 10, 100))
 //        addGestures()
     }
     func addGestures(){
@@ -89,7 +89,7 @@ class GameViewController: UIViewController {
         let cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
         cameraNode.camera?.zFar = 500;
-        cameraNode.position = SCNVector3Make(10, 10, 20);
+        cameraNode.position = SCNVector3Make(0, 0, 20);
 //        cameraNode.eulerAngles = SCNVector3Make(3, 0.6, 3)
 //        cameraNode.rotation  = SCNVector4Make(1, 1, 1, Float(-M_PI*0.75));
         scene.rootNode.addChildNode(cameraNode)
@@ -247,7 +247,7 @@ extension GameViewController:SCNSceneRendererDelegate{
 //            cameraNode?.position = block.position
         }
         if let scnView:SCNView = self.view as! SCNView? {
-//            label?.text = "camera: \(scnView.pointOfView?.eulerAngles)"
+            label?.text = "camera: \(scnView.pointOfView?.rotation)"
             //            print("camera: \(scnView.pointOfView?.eulerAngles)")
         }
         
