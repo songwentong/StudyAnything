@@ -63,16 +63,19 @@ class GameViewController: UIViewController {
         
         wall = wall.clone()
         wall.position = SCNVector3Make(-202, 50, 0)
+
         wall.physicsBody = SCNPhysicsBody.static()
         wall.rotation = SCNVector4Make(0, 1, 0, Float(M_PI_2))
         scene.rootNode.addChildNode(wall);
         wall = wall.clone()
         wall.position = SCNVector3Make(202, 50, 0);
+
         wall.rotation = SCNVector4Make(0, 1, 0, Float(-M_PI_2))
         wall.physicsBody = SCNPhysicsBody.static()
         scene.rootNode.addChildNode(wall);
         wall = wall.clone()
         wall.position = SCNVector3Make(0, 50, 200)
+
         wall.rotation = SCNVector4Make(0, 1, 0, Float(M_PI))
         wall.physicsBody = SCNPhysicsBody.static()
         scene.rootNode.addChildNode(wall);
@@ -81,7 +84,7 @@ class GameViewController: UIViewController {
     //创建环境
     func setupScene(){
         
-//        self.scnView.pointOfView = SCNNode()
+
         // create a new scene
         let scene = SCNScene()
         
@@ -89,7 +92,7 @@ class GameViewController: UIViewController {
         let cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
         cameraNode.camera?.zFar = 500;
-        cameraNode.position = SCNVector3Make(0, 0, 20);
+        cameraNode.position = SCNVector3Make(0, 0, 150);
 //        cameraNode.eulerAngles = SCNVector3Make(3, 0.6, 3)
 //        cameraNode.rotation  = SCNVector4Make(1, 1, 1, Float(-M_PI*0.75));
         scene.rootNode.addChildNode(cameraNode)
