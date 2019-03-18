@@ -6,13 +6,18 @@
 		<title></title>
 		<style>
 			/*调整画布的样式*/
-			
+
 			canvas {
 				border: 1px solid #d3d3d3;
 				background-color: #f1f1f1;
 			}
 		</style>
 		<script src="scripts/sprite.js"></script>
+		<audio id='bgmAudio' src='res/bgm.mp3' autoplay='true'>
+    </audio>
+		<!-- <div id="audio_btn" class="rotate"> -->
+    <!-- <audio src="res/bgm.mp3" autoplay="true" loop="loop" id="media" preload="true"></audio> -->
+<!-- </div> -->
 	</head>
 
 	<body onload="main()">
@@ -26,12 +31,12 @@
 			var frame;
 			var groundImage;
 			var marioImage;
-			
+
 			//游戏状态,  0游戏前,1游戏中,2游戏结束
 			var gameState;
 			//按键状态
 			var keystate;
-			
+
 
 			function CGRect(x, y, width, height) {
 				this.x = x;
@@ -45,7 +50,7 @@
 				y: 100,
 				//动画序列
 				animation: [0,1,2],
-				
+
 				//面对右边
 				faceToRight:true,
 				animationFrame1:0,
@@ -61,7 +66,7 @@
 				speedY: 0,
 				//重力加速度
 				gravity: 0.3,
-				
+
 				//跳跃
 				jump: function() {
 					//获得一个初始速度
@@ -78,14 +83,14 @@
 					 KEY_DOWN  = 40,
 					 * */
 					//左按钮被按下
-					if (keystate[37] == true) {
-						
+					if (keystate[37] == true) {//向左按钮按下
+
 						this.speedX -= this.xGravity;
 						this.speedX = Math.max(-this.xSpeed,this.speedX);
 						running = true;
 						this.faceToRight = false;
-				
-						
+
+
 					} else if (keystate[39] == true) {
 						//右按钮按下,设置速度为右边方向的最大速度
 						this.speedX += this.xGravity;
@@ -94,22 +99,22 @@
 						this.faceToRight = true;
 						//在跑动
 						running = true;
-						
-						
+
+
 //						animationFrame =(parseInt(frame/1)%3);
-						
+
 						//右侧有足够的空间,可以向右侧移动offset
 						if(offSetX+windowWidth<groundWidth){
-						
+
 						//人物在屏幕右端
 						if(mario.x>windowWidth * 0.5){
 							//把速度设置为0,让屏幕运动
 							this.speedX = 0;
 						}{
-							
+
 						}
 						}
-						
+
 					} else {
 						this.speedX = 0;
 						running = false;
@@ -119,7 +124,7 @@
 						this.animationFrame1 %= this.animation.length;
 //						console.log(this.animationFrame1);
 					}
-					
+
 					//上按钮
 					if (keystate[38] == true) {
 						//地面
@@ -157,7 +162,7 @@
 								this.y = rect.y - this.height;
 								onGround = true;
 							}else{
-								
+
 							}
 						}
 					}
@@ -165,7 +170,7 @@
 				update: function() {
 					//检查按钮状态,调整运动状态
 					this.checkButtonEvent();
-					
+
 					//移动到该位置
 					this.speedY += this.gravity;
 					this.y += this.speedY;
@@ -192,10 +197,10 @@
 					if (this.y + this.height >= windowHeight) {
 						gameOver();
 					} else {}
-					
+
 					//如果速度大于0,或者画布在移动,执行必要的行走.
-					
-					
+
+
 				},
 				draw: function() {
 					context.save();
@@ -204,28 +209,34 @@
 //					context.scale(-1,1);
 					//在跳跃中
 					if(this.gravity!=0){
-						
+
 						jumpImage.draw(context,this.x,this.y);
 //						context.angl
 					}else{
-						
+						if(!this.faceToRight){
+							//如果面朝左
+							// context.scale(-1, 1);
+							context.setTransform(1,0,0,1,0,0);
+						}else{
+							//如果面朝右
+						}
 						//跑步中
 						if(running){
 						var n = this.animationFrame1;
-						
-//						if(!this.faceToRight){
-//							context.setTransform(1,0,0,1,0,0);
-//						}
 						smallMarioRunImages[n].draw(context,this.x,this.y);
 //						smallMarioRunImages[n].draw2(context,this.x,this.y,this.faceToRight);
 //						var n = this.animation[this.frame];
 //		s_bird[n].draw(ctx, -s_bird[n].width/2, -s_bird[n].height/2);
 					}else{
+						//context.scale(-1, 1);
 						marioImage.draw(context,this.x,this.y);
 					}
+					// context.scale(1, 1);
+					//恢复transform
+					// context.setTransform(1,0,0,1,0,0);
 					}
-//					context.setTransform(1,0,0,1,0,0);
-					
+
+
 //					context.fillRect(this.x, this.y, this.width, this.height);
 					context.restore();
 				}
@@ -247,7 +258,7 @@
 						rect = new CGRect(gorundWidth * i, windowHeight - 2*groundHeight, gorundWidth, groundHeight);
 						grounds.push(rect);
 					}
-					
+
 				},
 				update: function() {
 					//可以向右移动
@@ -260,7 +271,7 @@
 								offSetX+=mario.xSpeed;
 //								mario.x-=mario.speedX;
 							}
-							
+
 						}
 					}
 				},
@@ -268,29 +279,41 @@
 					for (index in grounds) {
 						var rect = grounds[index];
 						context.fillStyle = "#ff0";
-						
+
 						groundImage.draw(context, rect.x-offSetX, rect.y);
-						
+
 					}
 				}
 			};
-			
+
 			var backGround = {
 				update:function(){
-					
+
 				},
 				draw:function(){
-					
+
 				}
 			};
-			
+
 			//控制
 			var control = {};
 			//创建主方法
 			function main() {
 				//初始化马里奥运动的图片
 				initSprites();
-				
+				initDatas();
+				setInterval("playBgmMusic()",1)
+				// playBgmMusic()
+			}
+			function playBgmMusic(){
+				var audio = document.getElementById("bgmAudio")
+				// console
+				if (audio.paused){
+					audio.paused = false
+					audio.play();
+				}
+			}
+			function initDatas(){
 				frame = 0;
 				offSetX = 0;
 				gameState = 1;
@@ -322,8 +345,8 @@
 					//去掉按键事件
 					delete keystate[event.keyCode];
 				});
-				
-				
+
+
 				marioImage = new Image();
 				marioImage.onload = function(){
 					marioImage = new Sprite(marioImage,0,0,24,32);
@@ -331,8 +354,8 @@
 					mario.height = 32;
 				}
 				marioImage.src = "res/smallMario.png";
-				
-				
+
+
 				//初始化地面或者障碍物
 				ground.initGrounds();
 				groundImage = new Image();
@@ -343,7 +366,6 @@
 				groundImage.src = "res/ground.png";
 			}
 
-			
 
 			function reset() {
 				//
