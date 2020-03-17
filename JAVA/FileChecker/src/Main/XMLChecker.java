@@ -40,11 +40,11 @@ import XMLParser.*;
 
 
  本类有两个功能
- 1.检查占位符是否合法的.
- 2.检查某一种语言中的占位符是否和英文中的是一样的.(类型和数量一一进行比对) 
- 
- check方法用于功能1
- checkPlaceHolders方法用于功能2
+ 1.检查占位符是否有遗漏的,不一致的.
+ 2.检查某一种语言中的占位符是否和英文中的是一样的.(类型和数量一一进行比对)
+
+ check 方法用于功能1
+ checkPlaceHolders 方法用于功能2
  */
 public class XMLChecker {
 	public static long checkTime;
@@ -55,7 +55,7 @@ public class XMLChecker {
 	public XMLChecker() {
 		super();
 		checkTime = 0;
-		
+
 	}
 
 	public static boolean isMac(){
@@ -69,7 +69,7 @@ public class XMLChecker {
 		}
 		return isMac;
 	}
-	
+
 	// 根路径 相当于home下的桌面下的xml 就是home/desktop/xml
 	public static String homeDirectory() {
 		String os = System.getProperty("os.name");
@@ -98,12 +98,12 @@ public class XMLChecker {
 		Date date1 = new Date();
 		System.out.println("print Date:" + date1.toString());
 	}
-	
+
 
 	/*
 	检查桌面下名字为xml的文件夹下所有的xml文件,遍历筛选字符串
-	 
-	 
+
+
 	 */
 	public void check() {
 				Date date1 = new Date();
@@ -113,11 +113,11 @@ public class XMLChecker {
 				String home = XMLChecker.homeDirectory();
 				//得到home路径下所有的xml文件
 				ArrayList<String> findAllXMLFilePathes = findAllXMLFilePathesAtPath(home);
-				
+
 				System.out.print("number of xml files: " + findAllXMLFilePathes.size() + "\n\n");
 				//遍历该数组,挨个检查
 				for (int i = 0; i < findAllXMLFilePathes.size(); i++) {
-					
+
 					//根据文件路径来检查
 					checkFileWithPath(findAllXMLFilePathes.get(i));
 				}
@@ -136,10 +136,10 @@ public class XMLChecker {
 	}
 
 	// 检查占位符是否和英文的一样
-	public void checkPlaceHolders() {				
+	public void checkPlaceHolders() {
 				int errorCount = 0;
 				int checkPlaceHoldersCount = 0;
-				
+
 				// 开始检查占位符是否相等
 				String homeDirectory = XMLChecker.homeDirectory();
 				System.out.println("start checking place holders equal... \n"+"home directory:" + homeDirectory);
@@ -149,7 +149,7 @@ public class XMLChecker {
 				//得到英文的路径下所有的文件
 				ArrayList<String> englishPathes = findAllXMLFilePathesAtPath(homeDirectory + "/en");
 				System.out.println("get the number of xml files at english path:" + englishPathes.size()+"\n");
-				
+
 				//遍历英文文件
 				for (int a = 0; a < englishPathes.size(); a++) {
 
@@ -161,9 +161,9 @@ public class XMLChecker {
 						String currentLanguage = homeFilelist[i];
 						// if get .SD_Store or get English path,do nothing,find others
 						if (!currentLanguage.equals(".DS_Store") || currentLanguage.equals("en")) {
-							
+
 							String currentPath = englishPath.replace("/en", "/" + currentLanguage);
-							
+
 							//如果是mac
 							if (XMLChecker.isMac()) {
 								//把英文换成当前路径
@@ -172,7 +172,7 @@ public class XMLChecker {
 								//把英文换成当前路径
 								currentPath = englishPath.replace("\\en", "\\" + currentLanguage);
 							}
-							
+
 							//英文路径解析的数据
 							Map<String, Object> englishFile = DomXMLParser.Dom2MapFromPath(englishPath);
 							//当前路径解析的数据
@@ -199,24 +199,24 @@ public class XMLChecker {
 									//是否相当
 									Boolean equal = true;
 									//遍历该set
-									for (String str : ssssss) {  
+									for (String str : ssssss) {
 										Integer vv1 = map1.get(str);
 										Integer vv2 = map2.get(str);
 										if (vv1 != vv2) {
 											equal = false;
 										}
-										
-									}  
+
+									}
 									if (!equal) {
-										
+
 										System.out.println("strings have different place holders found: \nenglish path is:" + englishPath + "\ncurrent path is:"
 												+ currentPath + "\nkey: " + key + "\nenglish value: " + v1
 												+ "\ncurrent value: " + v2 + "\n");
 										errorCount ++;
 									}
 									checkPlaceHoldersCount++;
-									
-									
+
+
 
 								} else {
 									//System.out.print("找到不是字符串类型的数据:" + entry.getKey());
